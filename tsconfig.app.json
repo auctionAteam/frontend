@@ -21,7 +21,12 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"] // src 아래의 모든 경로를 import 할때 @ 로 사용할 수 있게 도와줌
+    }
   },
   "include": ["src"]
 }
