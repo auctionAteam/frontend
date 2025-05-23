@@ -1,54 +1,22 @@
-# React + TypeScript + Vite
+프로젝트 시작 방법
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. `yarn install`
+2. `yarn dev`
 
-Currently, two official plugins are available:
+## 명령어 사용법
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+전체 코드를 lint 하려면 `yarn lint` 명령오를 입력하면 됩니다.
 
-## Expanding the ESLint configuration
+전체 코드에 prettier를 적용하고 싶으면 `yarn format` 을 사용하면 됩니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 깃허브 커밋 규칙
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+`feat` 새로운 기능에 대한 커밋
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`fix` 버그 수정에 대한 커밋
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+`chore` 그 외 자잘한 수정에 대한 커밋
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+`refactor` 코드 리팩토링에 대한 커밋
+
+`build` 빌드 관련 파일 수정 / 모듈 설치 또는 삭제에 대한 커밋
