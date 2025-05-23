@@ -1,0 +1,20 @@
+{
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "[javascript, typescript, javascriptreact, typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": true,
+  "prettier.configPath": ".prettierrc",
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "cSpell.words": ["Pretendard", "VITE"]
+}
