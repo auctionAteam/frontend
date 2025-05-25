@@ -1,4 +1,0 @@
-globalFolder: .yarn
-nodeLinker: pnp
-
-enableGlobalCache: false
