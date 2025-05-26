@@ -16,5 +16,5 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "cSpell.words": ["Pretendard", "VITE"]
+  "cSpell.words": ["Pretendard", "prms", "VITE"]
 }
