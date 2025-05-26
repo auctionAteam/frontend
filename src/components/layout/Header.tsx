@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
+import { colors } from '@/styles';
+
 import Wrapper from './Wrapper';
 
 const Header = () => {
@@ -28,7 +30,7 @@ const wrapperStyle = css`
   height: 70px;
   position: fixed;
   background-color: white;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid ${colors.gray100};
 `;
 
 const StyledHeader = styled.div`
@@ -44,7 +46,7 @@ const StyledHeader = styled.div`
 
   .navMenuWrapper {
     display: flex;
-    gap: 15px;
+    gap: 25px;
 
     span {
       cursor: pointer;

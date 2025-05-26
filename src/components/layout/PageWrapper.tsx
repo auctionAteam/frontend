@@ -20,7 +20,7 @@ const PageWrapper = ({ children, ...props }: PageWrapperProps) => {
 export default PageWrapper;
 
 const wrapperStyle = css`
-  min-height: calc(100dvh - 100px);
+  min-height: calc(100dvh - 195px);
 `;
 
 const containerStyle = css`
