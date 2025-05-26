@@ -1,9 +1,7 @@
-import styled from '@emotion/styled';
+import MainPage from './pages/main';
 
 function App() {
-  return <StyledContainer>emotion 사용 예제</StyledContainer>;
+  return <MainPage />;
 }
 
 export default App;
-
-const StyledContainer = styled.div``;

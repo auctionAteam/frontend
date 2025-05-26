@@ -16,7 +16,7 @@ const Footer = () => {
             <IoLogoGithub />
           </a>
         </div>
-        <div>제작자: 이상진, 김석우, 김진우, 황정우</div>
+        <div>제작자: 이상진, 김석우, 김진수, 황정우</div>
         <div>Copyright © prms auction all rights reserved.</div>
       </StyledFooter>
     </Wrapper>
