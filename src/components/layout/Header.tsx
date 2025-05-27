@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { colors } from '@/styles';
 
+import Button from '../common/Button';
 import Wrapper from './Wrapper';
 
 const Header = () => {
@@ -15,8 +16,10 @@ const Header = () => {
         </Link>
 
         <div className="navMenuWrapper">
-          <span>로그인</span>
-          <span>회원가입</span>
+          <Button size="small" styleType="ghost">
+            로그인
+          </Button>
+          <Button size="small">회원가입</Button>
         </div>
       </StyledHeader>
     </Wrapper>
@@ -45,11 +48,8 @@ const StyledHeader = styled.div`
   }
 
   .navMenuWrapper {
+    width: 190px;
     display: flex;
-    gap: 25px;
-
-    span {
-      cursor: pointer;
-    }
+    gap: 15px;
   }
 `;

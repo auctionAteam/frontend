@@ -16,7 +16,7 @@ export const buttonSizeStyle = {
   small: css`
     font-size: 16px;
     font-weight: 500;
-    line-height: 130%;
+    line-height: 120%;
     height: 40px;
   `,
   medium: css`
