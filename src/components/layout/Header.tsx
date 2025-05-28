@@ -48,7 +48,7 @@ const StyledHeader = styled.div`
   }
 
   .navMenuWrapper {
-    width: 190px;
+    width: 200px;
     display: flex;
     gap: 15px;
   }
