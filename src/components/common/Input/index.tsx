@@ -64,7 +64,6 @@ const Input = forwardRef(
     { label, size = 'medium', inputIcon, errorText, type, ...props }: InputProps,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const hasError = !!errorText;
     const inputId = useId();
 
     return (
@@ -74,7 +73,7 @@ const Input = forwardRef(
             {label}
           </StyledInputLabel>
         )}
-        <StyledInputWrapper hasError={hasError}>
+        <StyledInputWrapper hasError={!!errorText}>
           <StyledInput id={inputId} ref={ref} type={type || 'text'} $size={size} {...props} />
           {inputIcon && <StyledInputIcon size={size}>{inputIcon}</StyledInputIcon>}
         </StyledInputWrapper>
