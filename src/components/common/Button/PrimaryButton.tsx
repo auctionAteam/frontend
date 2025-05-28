@@ -19,7 +19,6 @@ export default PrimaryButton;
 
 const StyledPrimaryButton = styled.button<ButtonProps>`
   width: 100%;
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;

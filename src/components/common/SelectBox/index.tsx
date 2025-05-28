@@ -101,7 +101,6 @@ const SelectBox = ({ options, size = 'medium', defaultValue, onCheckedValue }: S
 export default SelectBox;
 
 const StyledSelectBox = styled.div`
-  flex: 1;
   width: 100%;
   display: inline-flex;
   flex-direction: column;
@@ -112,7 +111,7 @@ const StyledSelectButton = styled.button<{ size: SelectSizeType; isOpen: boolean
   background-color: white;
   color: ${colors.gray300};
   border-radius: 8px;
-  border: 2px solid ${colors.gray200};
+  border: 1px solid ${colors.gray200};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -137,7 +136,7 @@ const StyledSelectOptionWrapper = styled.div`
   width: 100%;
   margin-top: 8px;
   border-radius: 8px;
-  border: 2px solid ${colors.gray200};
+  border: 1px solid ${colors.gray200};
 `;
 
 const StyledOption = styled.div<{ size: SelectSizeType }>`
