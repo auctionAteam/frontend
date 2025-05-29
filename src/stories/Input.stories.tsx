@@ -83,10 +83,7 @@ export const ErrorInput: StoryObj<SelectBoxType> = {
       }
 
       if (password.length < 8) {
-        setErrorState((prevState) => ({
-          ...prevState,
-          password: '8글자 이상 입력해주세요.',
-        }));
+        setErrorState((prevState) => ({ ...prevState, password: '8글자 이상 입력해주세요.' }));
       } else {
         setErrorState((prevState) => ({ ...prevState, password: '' }));
       }
