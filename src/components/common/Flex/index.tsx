@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { type CSSProperties, forwardRef, type HTMLAttributes } from 'react';
+import { type CSSProperties, forwardRef, type HTMLAttributes, type Ref } from 'react';
 
 type FlexProps = {
   align?: CSSProperties['alignItems'];
@@ -14,9 +14,13 @@ type FlexProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const Flex = forwardRef(
-  ({ children, align, justify, wrap, basis, shrink, grow, direction, gap, ...props }: FlexProps) => {
+  (
+    { children, align, justify, wrap, basis, shrink, grow, direction, gap, ...props }: FlexProps,
+    ref: Ref<HTMLDivElement>,
+  ) => {
     return (
       <StyledFlex
+        ref={ref}
         align={align}
         justify={justify}
         wrap={wrap}
