@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { colors } from '@/styles';
 
+import { Flex } from '../common';
 import Button from '../common/Button';
 import Wrapper from './Wrapper';
 
@@ -14,12 +15,12 @@ const Header = () => {
         <Link to="/">
           <img src="/images/logo.png" />
         </Link>
-        <StyledMenuWrapper>
+        <Flex gap="15px" style={{ width: '200px' }}>
           <Button size="small" styleType="ghost">
             로그인
           </Button>
           <Button size="small">회원가입</Button>
-        </StyledMenuWrapper>
+        </Flex>
       </StyledHeader>
     </Wrapper>
   );
@@ -45,10 +46,4 @@ const StyledHeader = styled.div`
   img {
     cursor: pointer;
   }
-`;
-
-const StyledMenuWrapper = styled.div`
-  width: 200px;
-  display: flex;
-  gap: 15px;
 `;

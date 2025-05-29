@@ -4,6 +4,7 @@ import { IoLogoGithub } from 'react-icons/io';
 
 import { colors } from '@/styles';
 
+import { Flex } from '../common';
 import Wrapper from './Wrapper';
 
 const Footer = () => {
@@ -16,8 +17,8 @@ const Footer = () => {
             <IoLogoGithub />
           </a>
         </StyledFooterInfoWrapper>
-        <StyledFooterBottomText>제작자: 이상진, 김석우, 김진수, 황정우</StyledFooterBottomText>
-        <StyledFooterBottomText>Copyright © prms auction all rights reserved.</StyledFooterBottomText>
+        <Flex>제작자: 이상진, 김석우, 김진수, 황정우</Flex>
+        <Flex>Copyright © prms auction all rights reserved.</Flex>
       </StyledFooter>
     </Wrapper>
   );
@@ -58,9 +59,4 @@ const StyledFooterInfoWrapper = styled.div`
       color: black;
     }
   }
-`;
-
-const StyledFooterBottomText = styled.div`
-  margin: 0;
-  font-size: 15px;
 `;
