@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { type SelectHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
-import { colors } from '@/styles';
+import { colors, fonts } from '@/styles';
 
 type SelectSizeType = 'small' | 'medium' | 'large';
 
@@ -15,21 +15,15 @@ type SelectOptionType = {
 
 const SelectBoxSizeStyle = {
   small: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 120%;
+    ${fonts.subTitle2};
     height: 40px;
   `,
   medium: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle2};
     height: 45px;
   `,
   large: css`
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle1};
     height: 50px;
   `,
 };

@@ -7,7 +7,6 @@ import { colors } from '@/styles';
 const InputStyle = {
   small: css`
     font-size: 14px;
-    line-height: 120%;
     height: 38px;
   `,
   medium: css`
