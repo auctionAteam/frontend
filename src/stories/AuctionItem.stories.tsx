@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Flex } from '@/components/common';
 import AuctionItem from '@/components/common/AuctionItem';
+import Grid from '@/components/common/Grid';
 import { colors } from '@/styles';
 
 type AuctionItemType = typeof AuctionItem;
@@ -25,13 +25,24 @@ export const DefaultActionItem: StoryObj<AuctionItemType> = {
     sellerName: '이상진',
   },
   render: (args) => (
-    <Flex gap="10px" wrap="wrap" style={{ width: '1260px', backgroundColor: colors.gray200 }}>
+    <Grid
+      gap="10px"
+      align="center"
+      justify="center"
+      columns={5}
+      style={{
+        width: '1260px',
+        backgroundColor: colors.gray200,
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
       <AuctionItem {...args} />
       <AuctionItem {...args} />
       <AuctionItem {...args} />
       <AuctionItem {...args} />
       <AuctionItem {...args} />
       <AuctionItem {...args} />
-    </Flex>
+    </Grid>
   ),
 };
