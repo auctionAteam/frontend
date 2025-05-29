@@ -10,6 +10,9 @@ export const colors = {
   gray200: '#cacaca',
   gray250: '#5d5d5d',
   gray300: '#434343',
+
+  black: '#000000',
+  white: '#ffffff',
 } as const;
 
 export type ColorsType = typeof colors;
