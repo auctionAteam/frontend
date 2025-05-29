@@ -99,6 +99,7 @@ const StyledInputLabel = styled.label<{ size: InputSizeType }>`
 
 const StyledInputWrapper = styled.div<{ hasError?: boolean }>`
   display: flex;
+  background-color: ${colors.white};
   border-radius: 8px;
   border: 1px solid ${({ hasError }) => (hasError ? colors.error : colors.gray200)};
   transition: 0.1s ease-in-out;

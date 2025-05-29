@@ -7,8 +7,8 @@ import { colors, fonts } from '@/styles';
 
 type SelectSizeType = 'small' | 'medium' | 'large';
 
-type OptionValueType = string | number;
-type SelectOptionType = {
+export type OptionValueType = string | number;
+export type SelectOptionType = {
   label: string;
   value: OptionValueType;
 };
@@ -131,6 +131,7 @@ const StyledSelectOptionWrapper = styled.div`
   margin-top: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.gray200};
+  background-color: ${colors.white};
 `;
 
 const StyledOption = styled.div<{ size: SelectSizeType }>`

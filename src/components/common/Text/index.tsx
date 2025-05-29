@@ -6,7 +6,7 @@ import { type ColorKeysType, colors, type FontKeysType, fonts } from '@/styles';
 type TextProps = {
   font?: FontKeysType;
   color?: ColorKeysType;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 } & HTMLAttributes<HTMLSpanElement>;
 
 const Text = forwardRef(
