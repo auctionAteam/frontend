@@ -3,6 +3,8 @@ export const colors = {
   primaryHover: '#0066ff',
   primaryDisabled: '#569aff',
 
+  error: '#ff1a1a',
+
   gray100: '#f0f0f0',
   gray150: '#e4e4e4',
   gray200: '#cacaca',

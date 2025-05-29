@@ -19,7 +19,6 @@ export default OutlineButton;
 
 const StyledOutlineButton = styled.button<ButtonProps>`
   width: 100%;
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;

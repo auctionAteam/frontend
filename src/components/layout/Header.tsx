@@ -14,13 +14,12 @@ const Header = () => {
         <Link to="/">
           <img src="/images/logo.png" />
         </Link>
-
-        <div className="navMenuWrapper">
+        <StyledMenuWrapper>
           <Button size="small" styleType="ghost">
             로그인
           </Button>
           <Button size="small">회원가입</Button>
-        </div>
+        </StyledMenuWrapper>
       </StyledHeader>
     </Wrapper>
   );
@@ -46,10 +45,10 @@ const StyledHeader = styled.div`
   img {
     cursor: pointer;
   }
+`;
 
-  .navMenuWrapper {
-    width: 200px;
-    display: flex;
-    gap: 15px;
-  }
+const StyledMenuWrapper = styled.div`
+  width: 200px;
+  display: flex;
+  gap: 15px;
 `;
