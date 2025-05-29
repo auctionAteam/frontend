@@ -48,6 +48,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:19.1.5"],\
           ["@types/react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.5"],\
           ["@vitejs/plugin-react", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:4.5.0"],\
+          ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:9.27.0"],\
           ["eslint-config-prettier", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:10.1.5"],\
           ["eslint-plugin-import", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:2.31.0"],\
@@ -6364,6 +6365,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dayjs", [\
+      ["npm:1.11.13", {\
+        "packageLocation": "./.yarn/cache/dayjs-npm-1.11.13-d478bb9479-a3caf6ac83.zip/node_modules/dayjs/",\
+        "packageDependencies": [\
+          ["dayjs", "npm:1.11.13"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["debug", [\
       ["npm:3.2.7", {\
         "packageLocation": "./.yarn/cache/debug-npm-3.2.7-754e818c7a-37d96ae42c.zip/node_modules/debug/",\
@@ -9687,6 +9697,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:19.1.5"],\
           ["@types/react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.5"],\
           ["@vitejs/plugin-react", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:4.5.0"],\
+          ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:9.27.0"],\
           ["eslint-config-prettier", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:10.1.5"],\
           ["eslint-plugin-import", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:2.31.0"],\
