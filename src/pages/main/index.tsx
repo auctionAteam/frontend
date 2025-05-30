@@ -38,6 +38,7 @@ const MainPage = () => {
         <Flex gap="15px">
           <Flex style={{ width: '300px' }}>
             <Input
+              placeholder="검색어를 입력해주세요."
               value={searchKeyword}
               onChange={handleChangeSearchInput}
               onKeyDown={handleEnterKeyword}
