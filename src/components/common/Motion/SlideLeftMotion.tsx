@@ -3,11 +3,11 @@ import { forwardRef, type Ref } from 'react';
 
 import type { MotionProps } from '.';
 
-const SlideLeftMotion = forwardRef(({ key, children }: MotionProps, ref: Ref<HTMLDivElement>) => {
+const SlideLeftMotion = forwardRef(({ motionKey, children }: MotionProps, ref: Ref<HTMLDivElement>) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={key}
+        key={motionKey}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}

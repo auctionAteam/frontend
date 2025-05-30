@@ -1,17 +1,27 @@
+import styled from '@emotion/styled';
 import { MdOutlineSearch } from 'react-icons/md';
 
+import AuctionList from '@/components/auction/auctionList';
 import { Flex, Input, Motion, SelectBox, Text } from '@/components/common';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { AUCTION_SORTED_LIST } from '@/constants/auction';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 import useMain from './hooks/useMain';
 
 const MainPage = () => {
-  const { isAuctionInProgress, onCheckedSelectValue } = useMain();
+  const isNotMobile = useMediaQuery('(min-width: 1020px)');
+  const {
+    searchKeyword,
+    isAuctionInProgress,
+    onCheckedSelectValue,
+    handleChangeSearchInput,
+    handleEnterKeyword,
+  } = useMain();
 
   return (
     <PageWrapper>
-      <Flex justify="space-between">
+      <StyledMainPage isNotMobile={isNotMobile}>
         <Motion key={isAuctionInProgress}>
           <Flex direction="column" gap="10px">
             <Text font="h2">
@@ -27,7 +37,12 @@ const MainPage = () => {
         </Motion>
         <Flex gap="15px">
           <Flex style={{ width: '300px' }}>
-            <Input inputIcon={<MdOutlineSearch />} />
+            <Input
+              value={searchKeyword}
+              onChange={handleChangeSearchInput}
+              onKeyDown={handleEnterKeyword}
+              inputIcon={<MdOutlineSearch />}
+            />
           </Flex>
           <Flex style={{ width: '200px' }}>
             <SelectBox
@@ -37,9 +52,17 @@ const MainPage = () => {
             />
           </Flex>
         </Flex>
-      </Flex>
+      </StyledMainPage>
+      <AuctionList />
     </PageWrapper>
   );
 };
 
 export default MainPage;
+
+const StyledMainPage = styled.div<{ isNotMobile: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: ${({ isNotMobile }) => (isNotMobile ? 'row' : 'column')};
+  gap: 20px;
+`;

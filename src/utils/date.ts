@@ -6,22 +6,9 @@ import duration from 'dayjs/plugin/duration';
 dayjs.locale('ko');
 dayjs.extend(duration);
 
-export const getRemainingTime = (start: string, end: string) => {
-  const startTime = dayjs(start);
+export const getRemainingTime = (end: string) => {
   const endTime = dayjs(end);
   const now = dayjs();
-
-  if (now.isBefore(startTime)) {
-    const diff = dayjs.duration(startTime.diff(now));
-
-    const days = diff.days();
-    const hours = diff.hours();
-    const minutes = diff.minutes();
-
-    if (days > 0) return `${days}일 ${hours}시간 후 시작`;
-    if (hours > 0) return `${hours}시간 ${minutes}분 후 시작`;
-    return `${minutes}분 후 시작`;
-  }
 
   if (now.isAfter(endTime)) {
     return '경매가 종료 되었습니다.';

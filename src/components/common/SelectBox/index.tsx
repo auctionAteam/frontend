@@ -28,6 +28,18 @@ const SelectBoxSizeStyle = {
   `,
 };
 
+const SelectOptionSizeStyle = {
+  small: css`
+    top: 46px;
+  `,
+  medium: css`
+    top: 52px;
+  `,
+  large: css`
+    top: 57px;
+  `,
+};
+
 type SelectBoxProps = {
   options: SelectOptionType[];
   size?: SelectSizeType;
@@ -80,7 +92,7 @@ const SelectBox = ({ options, size = 'medium', defaultValue, onCheckedValue }: S
       </StyledSelectButton>
 
       {isOpen && (
-        <StyledSelectOptionWrapper>
+        <StyledSelectOptionWrapper size={size}>
           {options.map((option) => (
             <StyledOption key={option.value} size={size} onClick={() => handleSelectOption(option)}>
               {option.label}
@@ -98,6 +110,7 @@ const StyledSelectBox = styled.div`
   width: 100%;
   display: inline-flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const StyledSelectButton = styled.button<{ size: SelectSizeType; isOpen: boolean }>`
@@ -126,12 +139,14 @@ const StyledSelectButton = styled.button<{ size: SelectSizeType; isOpen: boolean
   }
 `;
 
-const StyledSelectOptionWrapper = styled.div`
+const StyledSelectOptionWrapper = styled.div<{ size: SelectSizeType }>`
+  position: absolute;
   width: 100%;
-  margin-top: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.gray200};
   background-color: ${colors.white};
+  z-index: 5;
+  ${({ size }) => SelectOptionSizeStyle[size]};
 `;
 
 const StyledOption = styled.div<{ size: SelectSizeType }>`

@@ -11,10 +11,7 @@ import Flex from '../Flex';
 import Text from '../Text';
 
 const AuctionItem = forwardRef(
-  (
-    { thumbnail, name, startTime, endTime, startPrice, sellerName }: AuctionItemType,
-    ref: Ref<HTMLDivElement>,
-  ) => {
+  ({ thumbnail, name, endTime, startPrice, sellerName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
     return (
       <StyledActionItem ref={ref}>
         <StyledThumbnailWrapper>
@@ -33,10 +30,10 @@ const AuctionItem = forwardRef(
               [시작 가격]
             </Text>
           </Flex>
-          <Flex gap="5px" align="flex-start" style={{ marginTop: '8px', marginBottom: '3px' }}>
+          <Flex gap="5px" align="flex-start" style={{ marginTop: '5px', marginBottom: '3px' }}>
             <AiOutlineClockCircle style={{ fill: colors.gray250 }} />
             <Text font="body2" color="gray250">
-              {getRemainingTime(startTime, endTime)}
+              {getRemainingTime(endTime)}
             </Text>
           </Flex>
           <Text font="body2" color="gray250">
@@ -51,23 +48,23 @@ const AuctionItem = forwardRef(
 export default AuctionItem;
 
 const StyledActionItem = styled.div`
-  width: 230px;
+  width: 100%;
   height: 365px;
-  padding: 8px;
+  padding: 12px;
+  border: 1px solid ${colors.gray150};
+  border-radius: 8px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 8px;
   cursor: pointer;
 `;
 
 const StyledThumbnailWrapper = styled.div`
-  width: 214px;
+  width: 100%;
   height: 230px;
   border-radius: 8px;
-  background-color: ${colors.white};
+  margin-bottom: 8px;
   overflow: hidden;
-  margin-bottom: 5px;
 
   img {
     width: 100%;
