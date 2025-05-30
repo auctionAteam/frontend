@@ -2,6 +2,8 @@
 import { css } from '@emotion/react';
 import { type ButtonHTMLAttributes, forwardRef, type Ref } from 'react';
 
+import { fonts } from '@/styles';
+
 import GhostButton from './GhostButton';
 import OutlineButton from './OutlineButton';
 import PrimaryButton from './PrimaryButton';
@@ -14,21 +16,15 @@ export const BUTTON_STYLE_KEYS = {
 
 export const buttonSizeStyle = {
   small: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 120%;
+    ${fonts.subTitle2};
     height: 40px;
   `,
   medium: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle2};
     height: 45px;
   `,
   large: css`
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle1};
     height: 50px;
   `,
 };

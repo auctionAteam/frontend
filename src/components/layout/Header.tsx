@@ -32,6 +32,7 @@ const wrapperStyle = css`
   width: 100%;
   height: 70px;
   position: fixed;
+  z-index: 999;
   background-color: white;
   border-bottom: 1px solid ${colors.gray100};
 `;

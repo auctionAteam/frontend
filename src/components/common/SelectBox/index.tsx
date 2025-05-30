@@ -3,34 +3,40 @@ import styled from '@emotion/styled';
 import { type SelectHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
-import { colors } from '@/styles';
+import { colors, fonts } from '@/styles';
 
 type SelectSizeType = 'small' | 'medium' | 'large';
 
-type OptionValueType = string | number;
-type SelectOptionType = {
+export type OptionValueType = string | number;
+export type SelectOptionType = {
   label: string;
   value: OptionValueType;
 };
 
 const SelectBoxSizeStyle = {
   small: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 120%;
+    ${fonts.subTitle2};
     height: 40px;
   `,
   medium: css`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle2};
     height: 45px;
   `,
   large: css`
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 130%;
+    ${fonts.subTitle1};
     height: 50px;
+  `,
+};
+
+const SelectOptionSizeStyle = {
+  small: css`
+    top: 46px;
+  `,
+  medium: css`
+    top: 52px;
+  `,
+  large: css`
+    top: 57px;
   `,
 };
 
@@ -86,7 +92,7 @@ const SelectBox = ({ options, size = 'medium', defaultValue, onCheckedValue }: S
       </StyledSelectButton>
 
       {isOpen && (
-        <StyledSelectOptionWrapper>
+        <StyledSelectOptionWrapper size={size}>
           {options.map((option) => (
             <StyledOption key={option.value} size={size} onClick={() => handleSelectOption(option)}>
               {option.label}
@@ -104,6 +110,7 @@ const StyledSelectBox = styled.div`
   width: 100%;
   display: inline-flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const StyledSelectButton = styled.button<{ size: SelectSizeType; isOpen: boolean }>`
@@ -132,11 +139,14 @@ const StyledSelectButton = styled.button<{ size: SelectSizeType; isOpen: boolean
   }
 `;
 
-const StyledSelectOptionWrapper = styled.div`
+const StyledSelectOptionWrapper = styled.div<{ size: SelectSizeType }>`
+  position: absolute;
   width: 100%;
-  margin-top: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.gray200};
+  background-color: ${colors.white};
+  z-index: 5;
+  ${({ size }) => SelectOptionSizeStyle[size]};
 `;
 
 const StyledOption = styled.div<{ size: SelectSizeType }>`

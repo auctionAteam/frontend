@@ -24,5 +24,5 @@ const wrapperStyle = css`
 `;
 
 const containerStyle = css`
-  padding-top: 80px;
+  padding-top: 110px;
 `;
