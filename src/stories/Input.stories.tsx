@@ -5,9 +5,9 @@ import { MdOutlineSearch } from 'react-icons/md';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 
-type SelectBoxType = typeof Input;
+type InputType = typeof Input;
 
-const meta: Meta<SelectBoxType> = {
+const meta: Meta<InputType> = {
   title: 'common/Input',
   component: Input,
   argTypes: {
@@ -20,7 +20,7 @@ const meta: Meta<SelectBoxType> = {
 
 export default meta;
 
-export const DefaultInput: StoryObj<SelectBoxType> = {
+export const DefaultInput: StoryObj<InputType> = {
   args: {
     placeholder: '값을 입력해주세요.',
   },
@@ -31,7 +31,7 @@ export const DefaultInput: StoryObj<SelectBoxType> = {
   ),
 };
 
-export const LabelInput: StoryObj<SelectBoxType> = {
+export const LabelInput: StoryObj<InputType> = {
   args: {
     label: '비밀번호',
     placeholder: '비밀번호를 입력해주세요.',
@@ -43,7 +43,7 @@ export const LabelInput: StoryObj<SelectBoxType> = {
   ),
 };
 
-export const IconInput: StoryObj<SelectBoxType> = {
+export const IconInput: StoryObj<InputType> = {
   args: {
     placeholder: '값을 입력해주세요.',
     inputIcon: <MdOutlineSearch />,
@@ -55,7 +55,7 @@ export const IconInput: StoryObj<SelectBoxType> = {
   ),
 };
 
-export const ErrorInput: StoryObj<SelectBoxType> = {
+export const ErrorInput: StoryObj<InputType> = {
   args: {
     placeholder: '값을 입력해주세요.',
   },

@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react';
 
+import { Motion } from '@/components/common';
 import { ResetCSS } from '@/styles/reset';
 
 const GlobalStyle = css`
@@ -16,11 +17,11 @@ interface StyleProviderProps {
 
 const StyleProvider = ({ children }: StyleProviderProps) => {
   return (
-    <>
+    <Motion>
       <Global styles={ResetCSS} />
       <Global styles={GlobalStyle} />
       {children}
-    </>
+    </Motion>
   );
 };
 
