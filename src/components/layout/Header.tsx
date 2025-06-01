@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { colors } from '@/styles';
 
@@ -9,6 +9,8 @@ import Button from '../common/Button';
 import Wrapper from './Wrapper';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper css={wrapperStyle}>
       <StyledHeader>
@@ -16,7 +18,7 @@ const Header = () => {
           <img src="/images/logo.png" />
         </Link>
         <Flex gap="15px" style={{ width: '200px' }}>
-          <Button size="small" styleType="ghost">
+          <Button onClick={() => navigate('/login')} size="small" styleType="ghost">
             로그인
           </Button>
           <Button size="small">회원가입</Button>
