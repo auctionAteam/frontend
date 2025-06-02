@@ -3,7 +3,7 @@ import type { SetStateAction } from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 
 import { useModalStore } from '@/store/useModalStore';
-import type { DaumAddressType } from '@/types/daumAddress';
+import type { DaumAddressType } from '@/types/account';
 
 type InputAddressModalProps = {
   setAddress: React.Dispatch<SetStateAction<string>>;

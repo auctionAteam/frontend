@@ -1,11 +1,7 @@
 import { Flex, Input } from '@/components/common';
+import type { AccountInputType } from '@/types/account';
 
-type TextInputProps = {
-  label: string;
-  name: string;
-  errorText?: string;
-  placeholder?: string;
-};
+type TextInputProps = AccountInputType;
 
 const TextInput = ({ label, name, errorText, placeholder }: TextInputProps) => {
   return (

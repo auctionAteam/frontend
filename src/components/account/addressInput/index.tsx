@@ -1,12 +1,10 @@
 import { Button, Flex, Input } from '@/components/common';
+import type { AccountInputType } from '@/types/account';
 
 type AddressInputProps = {
-  label: string;
-  name: string;
   address: string;
-  errorText?: string;
   onClick?: () => void;
-};
+} & AccountInputType;
 
 const AddressInput = ({ label, name, address, errorText, onClick }: AddressInputProps) => {
   return (

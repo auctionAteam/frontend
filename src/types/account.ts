@@ -1,3 +1,10 @@
+export type AccountInputType = {
+  label: string;
+  name: string;
+  errorText?: string;
+  placeholder?: string;
+};
+
 export type DaumAddressType = {
   address: string;
   addressType: string;
