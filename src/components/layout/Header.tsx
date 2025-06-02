@@ -21,7 +21,9 @@ const Header = () => {
           <Button onClick={() => navigate('/login')} size="small" styleType="ghost">
             로그인
           </Button>
-          <Button size="small">회원가입</Button>
+          <Button onClick={() => navigate('/signup')} size="small">
+            회원가입
+          </Button>
         </Flex>
       </StyledHeader>
     </Wrapper>

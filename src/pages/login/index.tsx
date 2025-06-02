@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 
-import { Button, Flex, Input, Text } from '@/components/common';
+import PasswordInput from '@/components/account/passwordInput';
+import TextInput from '@/components/account/textInput';
+import { Button, Flex, Text } from '@/components/common';
 import PageWrapper from '@/components/layout/PageWrapper';
 
 import useLogin from './hooks/useLogin';
 
 const LoginPage = () => {
-  const { errorState, handleSubmit, InputIcon, isPasswordType, onClickChangePasswordType } = useLogin();
+  const { errorState, handleSubmit, isPasswordType, onClickChangePasswordType } = useLogin();
 
   return (
     <PageWrapper>
@@ -17,30 +19,13 @@ const LoginPage = () => {
             지금 바로 경매에 참여해 보세요.
           </Text>
         </Flex>
-
         <StyledLoginForm onSubmit={handleSubmit}>
-          <Flex direction="column" gap="10px">
-            <Input label="아이디" name="id" />
-            <Text font="body2" color="error">
-              {errorState.id && errorState.id}
-            </Text>
-          </Flex>
-          <Flex direction="column" gap="10px">
-            <Input
-              type={isPasswordType ? 'password' : 'text'}
-              inputIcon={
-                <InputIcon
-                  onClick={onClickChangePasswordType}
-                  style={{ marginRight: '5px', cursor: 'pointer' }}
-                />
-              }
-              label="비밀번호"
-              name="password"
-            />
-            <Text font="body2" color="error">
-              {errorState.password && errorState.password}
-            </Text>
-          </Flex>
+          <TextInput label="아이디" name="email" errorText={errorState.email} />
+          <PasswordInput
+            isPasswordType={isPasswordType}
+            onClickChangePasswordType={onClickChangePasswordType}
+            errorText={errorState.password}
+          />
           <Button style={{ marginTop: '15px' }} type="submit">
             로그인
           </Button>
@@ -66,5 +51,5 @@ const StyledLoginForm = styled.form`
   width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 28px;
 `;

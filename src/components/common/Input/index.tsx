@@ -89,6 +89,7 @@ const StyledInputContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
   gap: 7px;
+  position: relative;
 `;
 
 const StyledInputLabel = styled.label<{ size: InputSizeType }>`
@@ -136,6 +137,8 @@ const StyledInputIcon = styled.div<{ size: InputSizeType }>`
 `;
 
 const StyledErrorText = styled.div<{ size: InputSizeType }>`
+  position: absolute;
+  top: calc(100% + 5px);
   color: ${colors.error};
   ${({ size }) => LabelAndErrorStyle[size]};
 `;

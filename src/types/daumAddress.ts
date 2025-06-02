@@ -1,0 +1,14 @@
+export type DaumAddressType = {
+  address: string;
+  addressType: string;
+  bname: string;
+  buildingName: string;
+  apartment: string;
+  zonecode: string;
+  sido: string;
+  sigungu: string;
+  sigunguCode: string;
+  roadAddress: string;
+  jibunAddress: string;
+  detailAddress?: string;
+};
