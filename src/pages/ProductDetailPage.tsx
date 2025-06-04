@@ -3,13 +3,13 @@ import BidHistory from '@/components/BidHistory';
 import ProductCard from '@/components/ProductCard';
 import ProductImage from '@/components/ProductImage';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ProductDetailPageStyle = styled.div`
   padding: 16px 32px;
   width: 100%;
   height: 100%;
-  margin-top: 24px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +22,7 @@ const ProductDetailPageStyle = styled.div`
 
     justify-content: center;
     align-items: center;
+    padding-top: 88px;
   }
   .pageTopBox {
     width: 100%;
@@ -38,15 +39,44 @@ const ProductDetailPageStyle = styled.div`
 
     box-sizing: border-box;
   }
-  button {
+  .testBtn {
     position: absolute;
-    top: 24px;
+    top: 88px;
     right: 24px;
   }
 `;
 
+
+const bidList = [
+  {
+    id: 0,
+    name: 'kim',
+    time: '4 hours ago',
+    money: 20000,
+  },
+  {
+    id: 1,
+    name: 'seok',
+    time: '5 hours ago',
+    money: 18000,
+  },
+  {
+    id: 2,
+    name: 'woo',
+    time: '6 hours ago',
+    money: 16000,
+  },
+  {
+    id: 3,
+    name: 'check',
+    time: '12 hours ago',
+    money: 14000,
+  },
+];
+
 const ProductDetailPage = () => {
   const [status, setStatus] = useState('wait');
+  const [newBidList, setNewBidList] = useState(bidList)
   const handleTest = () => {
     if (status === 'wait') {
       setStatus('active');
@@ -54,7 +84,9 @@ const ProductDetailPage = () => {
       setStatus('end');
     } else setStatus('wait');
   };
-
+  useEffect(()=>{
+    console.log(newBidList)
+  },[newBidList])
   return (
     <ProductDetailPageStyle>
       <div className="pageBox">
@@ -66,11 +98,11 @@ const ProductDetailPage = () => {
           <ProductCard status={status} />
         </div>
         <div className="pageBottomBox">
-          <BidHistory status={status} />
-          <BidBox />
+          <BidHistory status={status} bidList={newBidList} />
+          <BidBox status={status} setBidList={setNewBidList} bidList={newBidList} />
         </div>
       </div>
-      <button onClick={handleTest}>test용</button>
+      <button className='testBtn' onClick={handleTest}>test용</button>
     </ProductDetailPageStyle>
   );
 };

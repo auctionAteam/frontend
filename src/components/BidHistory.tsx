@@ -82,35 +82,15 @@ const BidHistoryStyle = styled.div`
 
 interface BidHistoryProps {
   status: string;
+  bidList: [{
+    id: number,
+    name?:string,
+    time?: string,
+    money: number, 
+  }]
 }
 
-const bidList = [
-  {
-    id: 0,
-    name: 'kim',
-    time: '4 hours ago',
-    money: 20000,
-  },
-  {
-    id: 1,
-    name: 'seok',
-    time: '5 hours ago',
-    money: 18000,
-  },
-  {
-    id: 2,
-    name: 'woo',
-    time: '6 hours ago',
-    money: 16000,
-  },
-  {
-    id: 3,
-    name: 'check',
-    time: '12 hours ago',
-    money: 14000,
-  },
-];
-const BidHistory: React.FC<BidHistoryProps> = ({ status }) => {
+const BidHistory: React.FC<BidHistoryProps> = ({ status, bidList }) => {
   return (
     <BidHistoryStyle>
       <h3 className="title">Bid History</h3>

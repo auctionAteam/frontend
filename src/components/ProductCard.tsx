@@ -33,30 +33,19 @@ const ProductCard: React.FC<BidHistoryProps> = ({ status }) => {
       <div className="auctionStatus">
         <div className="statusTitle">Auction Status</div>
         <div className="status">
-          {status === 'wait' ? (
-            'Coming Soon'
-          ) : status === 'active' ? (
-            'Bidding Open'
-          ) : (
-            'Auction Ended'
-          )}
+          {status === 'wait' ? 'Coming Soon' : status === 'active' ? 'Bidding Open' : 'Auction Ended'}
         </div>
 
-        <div className="statusTime">
-        Auction starts on Jun 1, 2025, 3:21 AM...
-        </div>
+        <div className="statusTime">Auction starts on Jun 1, 2025, 3:21 AM...</div>
       </div>
       <div className="sellerIfno">
-        <div className="sellerTitle">
-        Seller Information
-        </div>
+        <div className="sellerTitle">Seller Information</div>
         <div className="sellerInfoBox">
-
-        <div className="avatar"></div>
-        <div className="userInfoBox">
-          <div className="userName">Seok Woo Kim</div>
-          <div className="sellerRating">Rating: 4/5</div>
-        </div>
+          <div className="avatar"></div>
+          <div className="userInfoBox">
+            <div className="userName">Seok Woo Kim</div>
+            <div className="sellerRating">Rating: 4/5</div>
+          </div>
         </div>
       </div>
     </ProductCardStyle>
@@ -147,13 +136,13 @@ const ProductCardStyle = styled.div<BidHistoryProps>`
       color: rgb(2, 8, 23);
     }
   }
-  .auctionStatus{
+  .auctionStatus {
     margin-top: 16px;
     border-bottom: 1px solid rgb(226, 232, 240);
     padding-bottom: 12px;
     margin-bottom: 16px;
   }
-  .status{
+  .status {
     height: 24px;
     align-items: center;
     display: inline-flex;
@@ -164,17 +153,11 @@ const ProductCardStyle = styled.div<BidHistoryProps>`
     margin-top: 8px;
     box-sizing: border-box;
     background-color: ${({ status }) =>
-      status === 'wait' ? 'rgb(241,245,249)' :
-      status === 'active' ? 'rgb(15,23,42)' :
-      'rgb(226,232,240)'};
+      status === 'wait' ? 'rgb(241,245,249)' : status === 'active' ? 'rgb(15,23,42)' : 'rgb(226,232,240)'};
     color: ${({ status }) =>
-      status === 'wait' ? 'rgb(15,23,42)' :
-      status === 'active' ?'rgb(248,250,252)' :
-      'rgb(2,8,23)'};
-
-
+      status === 'wait' ? 'rgb(15,23,42)' : status === 'active' ? 'rgb(248,250,252)' : 'rgb(2,8,23)'};
   }
-  .statusTime{
+  .statusTime {
     color: rgb(100, 116, 139);
     font-size: 14px;
     font-weight: 400;
@@ -188,8 +171,7 @@ const ProductCardStyle = styled.div<BidHistoryProps>`
     font-weight: 500;
     line-height: 20px;
     margin-bottom: 8px;
-
-}
+  }
   .sellerInfoBox {
     display: flex;
     height: 32px;

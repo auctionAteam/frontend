@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@emotion/styled", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:11.14.0"],\
           ["@eslint/eslintrc", "npm:3.3.1"],\
           ["@eslint/js", "npm:9.27.0"],\
+          ["@types/node", "npm:22.15.21"],\
           ["@types/react", "npm:19.1.5"],\
           ["@types/react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.5"],\
           ["@vitejs/plugin-react", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:4.5.0"],\
@@ -54,6 +55,7 @@ const RAW_RUNTIME_STATE =
           ["prms-web-front", "workspace:."],\
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.0"],\
+          ["react-icons", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:5.5.0"],\
           ["react-router-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:7.6.0"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:8.32.1"],\
@@ -7881,6 +7883,7 @@ const RAW_RUNTIME_STATE =
           ["@emotion/styled", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:11.14.0"],\
           ["@eslint/eslintrc", "npm:3.3.1"],\
           ["@eslint/js", "npm:9.27.0"],\
+          ["@types/node", "npm:22.15.21"],\
           ["@types/react", "npm:19.1.5"],\
           ["@types/react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.5"],\
           ["@vitejs/plugin-react", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:4.5.0"],\
@@ -7899,6 +7902,7 @@ const RAW_RUNTIME_STATE =
           ["prms-web-front", "workspace:."],\
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.0"],\
+          ["react-icons", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:5.5.0"],\
           ["react-router-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:7.6.0"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:8.32.1"],\
@@ -7982,6 +7986,28 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:19.1.0"],\
           ["scheduler", "npm:0.26.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-icons", [\
+      ["npm:5.5.0", {\
+        "packageLocation": "./.yarn/cache/react-icons-npm-5.5.0-906730a3cf-a24309bfc9.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["react-icons", "npm:5.5.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:5.5.0", {\
+        "packageLocation": "./.yarn/__virtual__/react-icons-virtual-9b156b9250/0/cache/react-icons-npm-5.5.0-906730a3cf-a24309bfc9.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["@types/react", "npm:19.1.5"],\
+          ["react", "npm:19.1.0"],\
+          ["react-icons", "virtual:2dc9739ec28dcc2a14084e57ab59a5acd34805f1d343b07636f788ea49b6c91eede42657c6003640980027f46a8ff7f3d9ddabb46e4a2ad64476163eb5734df8#npm:5.5.0"]\
         ],\
         "packagePeers": [\
           "@types/react",\
@@ -9304,7 +9330,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jiti", null],\
           ["@types/less", null],\
           ["@types/lightningcss", null],\
-          ["@types/node", null],\
+          ["@types/node", "npm:22.15.21"],\
           ["@types/sass", null],\
           ["@types/sass-embedded", null],\
           ["@types/stylus", null],\
