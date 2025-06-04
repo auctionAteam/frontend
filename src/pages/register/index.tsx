@@ -76,7 +76,13 @@ const RegisterPage = () => {
             <div>이미지를 드래그하거나 클릭하여 업로드</div>
             <DescImg>JPG, PNG 파일만 지원됩니다.</DescImg>
             <UploadButton onClick={handleFileClick}>파일 선택</UploadButton>
-            <input type="file" hidden ref={fileInputRef} onChange={handleFileChange} accept="image/*" />
+            <input
+              type="file"
+              hidden
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="image/*"
+            />
           </UploadImg>
         </Card>
 
@@ -99,6 +105,8 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+
 
 const RegisterContainer = styled.div`
   max-width: 700px;
