@@ -1,31 +1,14 @@
 import styled from '@emotion/styled';
 
+import { winMockItem } from '@/constants/mockItem';
 import { colors } from '@/styles';
 
 const WinItem = () => {
-  const mockItems = [
-    // mock데이터로 임시 표시
-    {
-      id: 'D-01',
-      name: '엔틱 가구',
-      description: '리옹 3단 서랍장',
-      bidprice: 5500000,
-      imageUrls: ['/images/mypageImage/Drawer.jpeg'],
-    },
-    {
-      id: 'D-02',
-      name: '다이아 반지',
-      description: '3캐럿 다이아몬드 반지',
-      bidprice: 9500000,
-      imageUrls: ['/images/mypageImage/Ring.jpeg'],
-    },
-  ];
-
   return (
     <Section>
       <Title>낙찰된 상품</Title>
       <ItemList>
-        {mockItems.map((item) => (
+        {winMockItem.map((item) => (
           <ItemCard key={item.id}>
             <ImageList>
               {item.imageUrls.map((url, i) => (

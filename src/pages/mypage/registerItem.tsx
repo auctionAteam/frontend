@@ -1,31 +1,14 @@
 import styled from '@emotion/styled';
 
+import { registerMockItem } from '@/constants/mockItem';
 import { colors } from '@/styles';
 
 const RegisterItem = () => {
-  const mockItems = [
-    // mock데이터로 임시 표시
-    {
-      id: 'B-01',
-      name: '전통 도자기',
-      description: '조선시대 백자',
-      bidprice: 1500000,
-      imageUrls: ['/images/mypageImage/Porcelain.jpeg'],
-    },
-    {
-      id: 'B-02',
-      name: '명품 가방',
-      description: '샤넬 클래식 백, 정품 인증서 포함',
-      bidprice: 2800000,
-      imageUrls: ['/images/mypageImage/ChanelBag.jpeg'],
-    },
-  ];
-
   return (
     <Section>
       <Title>경매에 등록한 상품</Title>
       <ItemList>
-        {mockItems.map((item) => (
+        {registerMockItem.map((item) => (
           <ItemCard key={item.id}>
             <ImageList>
               {item.imageUrls.map((url, i) => (

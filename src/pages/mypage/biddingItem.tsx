@@ -1,31 +1,14 @@
 import styled from '@emotion/styled';
 
+import { biddingMockItem } from "@/constants/mockItem";
 import { colors } from '@/styles';
 
 const BiddingItem = () => {
-  const mockItems = [
-    // mock데이터로 임시 표시
-    {
-      id: 'A-01',
-      name: '레트로 카메라',
-      description: '1950년 제조 상품',
-      bidprice: 1500000,
-      imageUrls: ['/images/mypageImage/Camera1.jpeg', '/images/mypageImage/Camera2.jpeg'],
-    },
-    {
-      id: 'A-02',
-      name: '진로 골드 술잔',
-      description: '근현대사 자료로 사용 가능',
-      bidprice: 5000,
-      imageUrls: ['/images/mypageImage/Jinro.jpeg'],
-    },
-  ];
-
   return (
     <Section>
       <Title>입찰 중인 상품</Title>
       <ItemList>
-        {mockItems.map((item) => (
+        {biddingMockItem.map((item) => (
           <ItemCard key={item.id}>
             <ImageList>
               {item.imageUrls.map((url, i) => (

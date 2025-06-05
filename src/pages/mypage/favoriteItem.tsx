@@ -1,33 +1,14 @@
 import styled from '@emotion/styled';
 
+import { favoriteMockItem } from '@/constants/mockItem';
 import { colors } from '@/styles';
 
 const FavoriteItem = () => {
-  const mockItems = [
-    // mock데이터로 임시 표시
-    {
-      id: 'C-01',
-      name: '희귀 레트로 우표',
-      description: '1950년대 우표 세트, 미사용 상태',
-      bidprice: 350000,
-      seller: '레트로 우표 수집가',
-      imageUrls: ['/images/mypageImage/Stamp.jpeg'],
-    },
-    {
-      id: 'C-02',
-      name: '주전자',
-      description: '1960년대 사용했던 주전자',
-      bidprice: 90000,
-      seller: 'ArtFan',
-      imageUrls: ['/images/mypageImage/Kettle.jpeg'],
-    },
-  ];
-
   return (
     <Section>
       <Title>관심 등록한 상품</Title>
       <ItemList>
-        {mockItems.map((item) => (
+        {favoriteMockItem.map((item) => (
           <ItemCard key={item.id}>
             <ImageList>
               {item.imageUrls.map((url, i) => (
