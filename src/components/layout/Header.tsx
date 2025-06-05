@@ -1,26 +1,30 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { colors } from '@/styles';
 
+import { Flex } from '../common';
 import Button from '../common/Button';
 import Wrapper from './Wrapper';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper css={wrapperStyle}>
       <StyledHeader>
         <Link to="/">
           <img src="/images/logo.png" />
         </Link>
-
-        <div className="navMenuWrapper">
-          <Button size="small" styleType="ghost">
+        <Flex gap="15px" style={{ width: '200px' }}>
+          <Button onClick={() => navigate('/login')} size="small" styleType="ghost">
             로그인
           </Button>
-          <Button size="small">회원가입</Button>
-        </div>
+          <Button onClick={() => navigate('/signup')} size="small">
+            회원가입
+          </Button>
+        </Flex>
       </StyledHeader>
     </Wrapper>
   );
@@ -32,6 +36,7 @@ const wrapperStyle = css`
   width: 100%;
   height: 70px;
   position: fixed;
+  z-index: 999;
   background-color: white;
   border-bottom: 1px solid ${colors.gray100};
 `;
@@ -45,11 +50,5 @@ const StyledHeader = styled.div`
 
   img {
     cursor: pointer;
-  }
-
-  .navMenuWrapper {
-    width: 190px;
-    display: flex;
-    gap: 15px;
   }
 `;

@@ -6,9 +6,9 @@ import { colors } from '@/styles';
 import { type ButtonProps, buttonSizeStyle } from '.';
 
 const PrimaryButton = forwardRef(
-  ({ children, size, disabled, type = 'button' }: ButtonProps, ref: Ref<HTMLButtonElement>) => {
+  ({ children, size, disabled, type = 'button', ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => {
     return (
-      <StyledPrimaryButton type={type} ref={ref} size={size} disabled={disabled}>
+      <StyledPrimaryButton type={type} ref={ref} size={size} disabled={disabled} {...props}>
         {children}
       </StyledPrimaryButton>
     );
@@ -19,7 +19,6 @@ export default PrimaryButton;
 
 const StyledPrimaryButton = styled.button<ButtonProps>`
   width: 100%;
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;

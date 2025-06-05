@@ -6,9 +6,9 @@ import { colors } from '@/styles';
 import { type ButtonProps, buttonSizeStyle } from '.';
 
 const OutlineButton = forwardRef(
-  ({ children, size, type = 'button' }: ButtonProps, ref: Ref<HTMLButtonElement>) => {
+  ({ children, size, type = 'button', ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => {
     return (
-      <StyledOutlineButton type={type} ref={ref} size={size}>
+      <StyledOutlineButton type={type} ref={ref} size={size} {...props}>
         {children}
       </StyledOutlineButton>
     );
@@ -19,7 +19,6 @@ export default OutlineButton;
 
 const StyledOutlineButton = styled.button<ButtonProps>`
   width: 100%;
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
