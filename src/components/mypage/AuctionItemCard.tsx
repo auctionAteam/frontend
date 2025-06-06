@@ -19,15 +19,9 @@ const AuctionItemCard = ({ item, priceLabel = '입찰가', priceValue, extraFiel
         <Image src={item.thumbnail} alt={item.name} />
       </ImageSection>
       <Content>
-        <IdRow>
-          <IdValue>{item.id}</IdValue>
-        </IdRow>
-        <NameRow>
-          <NameValue>{item.name}</NameValue>
-        </NameRow>
-        <DescRow>
-          <DescValue>{item.description}</DescValue>
-        </DescRow>
+        <IdValue>{item.id}</IdValue>
+        <NameValue>{item.name}</NameValue>
+        <DescValue>{item.description}</DescValue>
         {extraField}
         <PriceRow>
           <Text font="subTitle2">{priceLabel}: </Text>
@@ -63,19 +57,7 @@ const Image = styled.img`
 
 const Content = styled(Flex)`
   flex-direction: column;
-  gap: 8px;
-`;
-
-const IdRow = styled(Flex)`
-  gap: 8px;
-`;
-
-const NameRow = styled(Flex)`
-  gap: 8px;
-`;
-
-const DescRow = styled(Flex)`
-  gap: 8px;
+  gap: 16px;
 `;
 
 const PriceRow = styled(Flex)`
@@ -88,6 +70,7 @@ const IdValue = styled.span`
   background-color: ${colors.gray200};
   border-radius: 8px;
   padding: 2px 6px;
+  align-self: flex-start;
 `;
 
 const NameValue = styled.span`
