@@ -24,7 +24,7 @@ const RegisterPage = () => {
   };
 
   const handleRegister = () => {
-    alert('상품이 등록되었습니다'); //post 아직 x
+    alert('상품이 등록되었습니다');
   };
 
   return (
@@ -86,7 +86,7 @@ const RegisterPage = () => {
             styleType="ghost"
             size="small"
             style={{ color: colors.gray250, borderColor: colors.gray250 }}
-            onClick={() => navigate(-1)} //현재는 히스토리가 없어서 작동 x (아직까진 직접 registerpage로 들어와서)
+            onClick={() => navigate(-1)}
           >
             뒤로 가기
           </Button>
