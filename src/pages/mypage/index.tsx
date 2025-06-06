@@ -1,11 +1,10 @@
 import PageWrapper from '@/components/layout/PageWrapper';
+import BiddingItem from '@/components/mypage/BiddingItem';
+import FavoriteItem from '@/components/mypage/FavoriteItem';
+import MyWinItem from '@/components/mypage/MyWinItem';
+import RegisterItem from '@/components/mypage/RegisterItem';
+import UserInfo from '@/components/mypage/UsersInfo';
 import { colors } from '@/styles';
-
-import BiddingItem from './biddingItem';
-import FavoriteItem from './favoriteItem';
-import RegisterItem from './registerItem';
-import UserInfo from './usersInfo';
-import WinItem from './winItem';
 
 const MyPage = () => {
   return (
@@ -15,7 +14,7 @@ const MyPage = () => {
       <BiddingItem />
       <RegisterItem />
       <FavoriteItem />
-      <WinItem />
+      <MyWinItem />
     </PageWrapper>
   );
 };

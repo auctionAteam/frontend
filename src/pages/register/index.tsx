@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Flex } from '@/components/common';
 import Button from '@/components/common/Button';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { colors } from '@/styles';
@@ -40,18 +41,18 @@ const RegisterPage = () => {
 
         <Card>
           <CardTitle>경매 설정</CardTitle>
-          <SettingSection>
-            <InputWrapper>
+          <Flex gap={16} wrap="wrap">
+            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
               <Label htmlFor="startPrice">시작 입찰가</Label>
               <Input id="startPrice" type="number" placeholder="0" />
               <Unit>원</Unit>
-            </InputWrapper>
-            <InputWrapper>
+            </Flex>
+            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
               <Label htmlFor="bidStep">입찰 단위</Label>
               <Input id="bidStep" type="number" placeholder="0" />
               <Unit>원</Unit>
-            </InputWrapper>
-          </SettingSection>
+            </Flex>
+          </Flex>
 
           <PeriodSection>
             <Label>경매 기간</Label>
@@ -87,7 +88,7 @@ const RegisterPage = () => {
             style={{ color: colors.gray250, borderColor: colors.gray250 }}
             onClick={() => navigate(-1)} //현재는 히스토리가 없어서 작동 x (아직까진 직접 registerpage로 들어와서)
           >
-            취소
+            뒤로 가기
           </Button>
           <Button styleType="primary" size="small" onClick={handleRegister}>
             등록하기
@@ -161,20 +162,6 @@ const Textarea = styled.textarea`
   font-size: 12px;
   resize: none;
   box-sizing: border-box;
-`;
-
-const SettingSection = styled.div`
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-`;
-
-const InputWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  gap: 6px;
 `;
 
 const Unit = styled.span`

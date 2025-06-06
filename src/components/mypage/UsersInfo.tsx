@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 import { colors } from '@/styles';
 
+import UserInfoItem from './UserInfoItem';
+
 const UsersInfo = () => {
   const user = {
     id: 'User1234',
@@ -16,30 +18,12 @@ const UsersInfo = () => {
     <Section>
       <Title>내 정보</Title>
       <InfoGrid>
-        <InfoItem>
-          <Label>아이디</Label>
-          <Value>{user.id}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>이름</Label>
-          <Value>{user.name}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>이메일</Label>
-          <Value>{user.email}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>휴대폰 번호</Label>
-          <Value>{user.phone}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>가입일</Label>
-          <Value>{user.created_at}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>주소</Label>
-          <Value>{user.address}</Value>
-        </InfoItem>
+        <UserInfoItem label="아이디" value={user.id} />
+        <UserInfoItem label="이름" value={user.name} />
+        <UserInfoItem label="이메일" value={user.email} />
+        <UserInfoItem label="전화번호" value={user.phone} />
+        <UserInfoItem label="가입일" value={user.created_at} />
+        <UserInfoItem label="주소" value={user.address} />
       </InfoGrid>
     </Section>
   );
@@ -73,18 +57,4 @@ const InfoGrid = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr); //열 2개
   gap: 16px 32px; //세로 16px, 가로 32px 간격
-`;
-
-const InfoItem = styled.li`
-  display: flex;
-  gap: 12px;
-`;
-
-const Label = styled.span`
-  font-weight: 600;
-  width: 120px;
-`;
-
-const Value = styled.span`
-  color: #444;
 `;
