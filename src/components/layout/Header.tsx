@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { ACCESS_TOKEN } from '@/constants/token';
 import { colors } from '@/styles';
 
 import { Flex } from '../common';
@@ -17,14 +18,22 @@ const Header = () => {
         <Link to="/">
           <img src="/images/logo.png" />
         </Link>
-        <Flex gap="15px" style={{ width: '200px' }}>
-          <Button onClick={() => navigate('/login')} size="small" styleType="ghost">
-            로그인
-          </Button>
-          <Button onClick={() => navigate('/signup')} size="small">
-            회원가입
-          </Button>
-        </Flex>
+        {localStorage.getItem(ACCESS_TOKEN) ? (
+          <Flex style={{ width: '110px' }}>
+            <Button onClick={() => navigate('/mypage')} styleType="ghost">
+              마이 페이지
+            </Button>
+          </Flex>
+        ) : (
+          <Flex gap="15px" style={{ width: '200px' }}>
+            <Button onClick={() => navigate('/login')} size="small" styleType="ghost">
+              로그인
+            </Button>
+            <Button onClick={() => navigate('/signup')} size="small">
+              회원가입
+            </Button>
+          </Flex>
+        )}
       </StyledHeader>
     </Wrapper>
   );

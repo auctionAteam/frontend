@@ -1,11 +1,21 @@
 import { useState } from 'react';
 
+import { ACCESS_TOKEN } from '@/constants/token';
+import useUserLogin from '@/hooks/apis/users/useUserLogin';
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex } from '@/utils/regExp';
 
 const useLogin = () => {
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [errorState, setErrorState] = useState<{ [key: string]: string }>({ email: '', password: '' });
+
+  const { mutate: userLogin } = useUserLogin({
+    onSuccess: (response) => {
+      localStorage.setItem(ACCESS_TOKEN, response.token);
+
+      window.location.href = '/';
+    },
+  });
 
   const onClickChangePasswordType = () => {
     setIsPasswordType(!isPasswordType);
@@ -37,7 +47,9 @@ const useLogin = () => {
     setErrorState(errorValidate.errors);
 
     if (!errorValidate.hasError) {
-      console.log('로그인 API 호출 함수가 들어갈 부분');
+      userLogin({ email, password });
+
+      e.currentTarget.reset();
     }
   };
 
