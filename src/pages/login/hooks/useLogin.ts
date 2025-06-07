@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { ACCESS_TOKEN } from '@/constants/token';
 import useUserLogin from '@/hooks/apis/users/useUserLogin';
@@ -8,12 +10,14 @@ import { emailRegex } from '@/utils/regExp';
 const useLogin = () => {
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [errorState, setErrorState] = useState<{ [key: string]: string }>({ email: '', password: '' });
+  const navigate = useNavigate();
 
   const { mutate: userLogin } = useUserLogin({
     onSuccess: (response) => {
       localStorage.setItem(ACCESS_TOKEN, response.token);
 
-      window.location.href = '/';
+      toast.success('로그인 성공!');
+      navigate('/');
     },
   });
 

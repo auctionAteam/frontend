@@ -1,15 +1,29 @@
+import { Button, Flex } from '@/components/common';
 import PageWrapper from '@/components/layout/PageWrapper';
 import BiddingItem from '@/components/mypage/BiddingItem';
 import FavoriteItem from '@/components/mypage/FavoriteItem';
 import MyWinItem from '@/components/mypage/MyWinItem';
 import RegisterItem from '@/components/mypage/RegisterItem';
 import UserInfo from '@/components/mypage/UsersInfo';
+import { ACCESS_TOKEN } from '@/constants/token';
 import { colors } from '@/styles';
 
 const MyPage = () => {
+  const onClickLogOut = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.href = '/';
+  };
+
   return (
     <PageWrapper>
-      <Title>MyPage</Title>
+      <Flex justify="space-between">
+        <Title>MyPage</Title>
+        <Flex style={{ width: '100px' }}>
+          <Button onClick={onClickLogOut} styleType="ghost" size="small">
+            로그아웃
+          </Button>
+        </Flex>
+      </Flex>
       <UserInfo />
       <BiddingItem />
       <RegisterItem />

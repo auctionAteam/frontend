@@ -3,6 +3,7 @@ import { MdOutlineSearch } from 'react-icons/md';
 
 import AuctionList from '@/components/auction/auctionList';
 import { Flex, Input, Motion, SelectBox, Text } from '@/components/common';
+import SkeletonAuctionItem from '@/components/common/Skeleton/SkeletonAuctionItem';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { AUCTION_SORTED_LIST } from '@/constants/auction';
 import useMediaQuery from '@/hooks/useMediaQuery';
@@ -12,8 +13,11 @@ import useMain from './hooks/useMain';
 const MainPage = () => {
   const isNotMobile = useMediaQuery('(min-width: 1020px)');
   const {
+    ObserverRef,
+    data,
     searchKeyword,
     isAuctionInProgress,
+    isLoading,
     onCheckedSelectValue,
     handleChangeSearchInput,
     handleEnterKeyword,
@@ -48,13 +52,18 @@ const MainPage = () => {
           <Flex style={{ width: '200px' }}>
             <SelectBox
               options={AUCTION_SORTED_LIST}
-              onCheckedValue={(selectedValue) => onCheckedSelectValue(selectedValue)}
+              onCheckedValue={onCheckedSelectValue}
               defaultValue="AUCTION_INPROGRESS"
             />
           </Flex>
         </Flex>
       </StyledMainPage>
-      <AuctionList />
+      {isLoading ? (
+        <SkeletonAuctionItem />
+      ) : (
+        <AuctionList auctionItems={data?.pages?.flatMap((page) => page.items) ?? []} />
+      )}
+      <StyledObserverBottom ref={ObserverRef} />
     </PageWrapper>
   );
 };
@@ -66,4 +75,13 @@ const StyledMainPage = styled.div<{ isNotMobile: boolean }>`
   justify-content: space-between;
   flex-direction: ${({ isNotMobile }) => (isNotMobile ? 'row' : 'column')};
   gap: 20px;
+  padding-bottom: 50px;
+`;
+
+const StyledObserverBottom = styled.div`
+  width: 100%;
+  height: 30px;
+  margin-top: 30px;
+  margin-bottom: 80px;
+  touch-action: none;
 `;

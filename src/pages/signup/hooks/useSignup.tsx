@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import InputAddressModal from '@/components/account/inputAddressModal';
 import useUserSignup from '@/hooks/apis/users/useUserSignup';
@@ -8,6 +10,7 @@ import { emailRegex, phoneNumberRegex } from '@/utils/regExp';
 
 const useSignup = () => {
   const { openModal } = useModalStore();
+  const navigate = useNavigate();
 
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [address, setAddress] = useState('');
@@ -21,8 +24,8 @@ const useSignup = () => {
 
   const { mutate: userSignup } = useUserSignup({
     onSuccess: () => {
-      // toast 들어가야함
-      console.log('성공');
+      toast.success('회원가입 성공!');
+      navigate('/login');
     },
   });
 
@@ -79,6 +82,7 @@ const useSignup = () => {
     if (!errorValidate.hasError) {
       userSignup({ email, password, name: userName, phoneNum: phoneNumber, address });
 
+      setAddress('');
       e.currentTarget.reset();
     }
   };
