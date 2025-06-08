@@ -11,15 +11,15 @@ import Flex from '../Flex';
 import Text from '../Text';
 
 const AuctionItem = forwardRef(
-  ({ thumbnail, name, endTime, startPrice, sellerName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
+  ({ img, itemName, endTime, startPrice, userName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
     return (
       <StyledActionItem ref={ref}>
         <StyledThumbnailWrapper>
-          <img src={thumbnail} alt="item-image" />
+          <img src={img[0]} alt="item-image" />
         </StyledThumbnailWrapper>
         <Flex direction="column" gap="3px" style={{ width: '100%' }}>
           <Text font="subTitle1" css={ellipsis}>
-            {name}
+            {itemName}
           </Text>
           <Flex gap="8px" align="center">
             <Text font="h3">
@@ -33,11 +33,11 @@ const AuctionItem = forwardRef(
           <Flex gap="5px" align="flex-start" style={{ marginTop: '5px', marginBottom: '3px' }}>
             <AiOutlineClockCircle style={{ fill: colors.gray250 }} />
             <Text font="body2" color="gray250">
-              {getRemainingTime(endTime)}
+              {getRemainingTime(endTime)} {/** 이 부분 모든 API가 연결된 이후 추가 수정이 필요해보임 */}
             </Text>
           </Flex>
           <Text font="body2" color="gray250">
-            판매자: {sellerName}
+            판매자: {userName}
           </Text>
         </Flex>
       </StyledActionItem>

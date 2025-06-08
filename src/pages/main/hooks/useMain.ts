@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useSearchParams } from 'react-router-dom';
 
 import type { OptionValueType } from '@/components/common/SelectBox';
 import useGetAuctionItems from '@/hooks/apis/items/useGetAuctionItems';
 
 const useMain = () => {
-  const [isAuctionInProgress, setIsAuctionInProgress] = useState<OptionValueType>('AUCTION_INPROGRESS');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const auctionInProgressState = searchParams.get('state');
+  const keyWord = searchParams.get('keyWord');
+
   const [searchKeyword, setSearchKeyword] = useState('');
 
-  const { data, fetchNextPage, hasNextPage, isLoading } = useGetAuctionItems(isAuctionInProgress);
-
+  const { data, fetchNextPage, hasNextPage, isLoading } = useGetAuctionItems(auctionInProgressState, keyWord);
   const { ref: ObserverRef, inView } = useInView({ threshold: 0.5 });
 
   useEffect(() => {
@@ -23,14 +27,14 @@ const useMain = () => {
   };
 
   const onCheckedSelectValue = (selectedValue: OptionValueType) => {
-    setIsAuctionInProgress(selectedValue);
+    setSearchParams((prevParams) => ({ ...Object.fromEntries(prevParams), state: String(selectedValue) }));
   };
 
   const handleEnterKeyword = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
 
-      console.log(searchKeyword);
+      setSearchParams((prevParams) => ({ ...Object.fromEntries(prevParams), keyWord: searchKeyword }));
     }
   };
 
@@ -38,7 +42,7 @@ const useMain = () => {
     ObserverRef,
     data,
     searchKeyword,
-    isAuctionInProgress,
+    auctionInProgressState,
     isLoading,
     onCheckedSelectValue,
     handleChangeSearchInput,

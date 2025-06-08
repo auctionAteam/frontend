@@ -12,7 +12,7 @@ const SkeletonAuctionItem = () => {
       isItemListTablet={isItemListTablet}
       isItemListDesktop={isItemListDesktop}
     >
-      {Array.from({ length: 15 }).map((_, idx) => (
+      {Array.from({ length: 10 }).map((_, idx) => (
         <StyledSkeletonAuctionItem key={idx} />
       ))}
     </StyledSkeletonAuctionItemWrapper>
@@ -41,5 +41,5 @@ const StyledSkeletonAuctionItem = styled.div`
   width: 100%;
   height: 365px;
   border-radius: 8px;
-  background-color: ${colors.gray100};
+  background-color: ${colors.white};
 `;

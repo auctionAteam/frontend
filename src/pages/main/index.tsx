@@ -16,7 +16,7 @@ const MainPage = () => {
     ObserverRef,
     data,
     searchKeyword,
-    isAuctionInProgress,
+    auctionInProgressState,
     isLoading,
     onCheckedSelectValue,
     handleChangeSearchInput,
@@ -26,16 +26,21 @@ const MainPage = () => {
   return (
     <PageWrapper>
       <StyledMainPage isNotMobile={isNotMobile}>
-        <Motion key={isAuctionInProgress}>
+        <Motion key={auctionInProgressState}>
           <Flex direction="column" gap="10px">
             <Text font="h2">
-              {isAuctionInProgress === 'AUCTION_INPROGRESS' ? '경매 진행중인 물품' : '경매 완료된 물품'}
+              {auctionInProgressState === 'before'
+                ? '경매 시작전인 물품'
+                : auctionInProgressState === 'auction'
+                  ? '경매 진행중인 물품'
+                  : '경매 완료된 물품'}
             </Text>
-
             <Text font="subTitle2" color="gray300">
-              {isAuctionInProgress === 'AUCTION_INPROGRESS'
-                ? '경매 진행중인 상품들을 구경해보세요.'
-                : '경매 완료된 상품들을 확인해보세요.'}
+              {auctionInProgressState === 'before'
+                ? '경매 시작전인 상품들을 구경해보세요.'
+                : auctionInProgressState === 'auction'
+                  ? '경매 진행중인 상품들을 확인해보세요.'
+                  : '경매 완료된 상품들을 확인해보세요.'}
             </Text>
           </Flex>
         </Motion>
@@ -53,7 +58,7 @@ const MainPage = () => {
             <SelectBox
               options={AUCTION_SORTED_LIST}
               onCheckedValue={onCheckedSelectValue}
-              defaultValue="AUCTION_INPROGRESS"
+              defaultValue="before"
             />
           </Flex>
         </Flex>
@@ -61,7 +66,9 @@ const MainPage = () => {
       {isLoading ? (
         <SkeletonAuctionItem />
       ) : (
-        <AuctionList auctionItems={data?.pages?.flatMap((page) => page.items) ?? []} />
+        <Motion key={auctionInProgressState}>
+          <AuctionList auctionItems={data?.pages?.flatMap((page) => page.items) ?? []} />
+        </Motion>
       )}
       <StyledObserverBottom ref={ObserverRef} />
     </PageWrapper>

@@ -1,13 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getAuctionItems } from '@/apis/items';
-import type { OptionValueType } from '@/components/common/SelectBox';
-import { auctionItemKeys } from '@/queries/items';
+import { AUCTION_ITEMS } from '@/queries/items';
 
-const useGetAuctionItems = (state: OptionValueType) => {
+const useGetAuctionItems = (state: string | null, keyWord: string | null) => {
   const { data, isLoading, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    ...auctionItemKeys.all(state),
-    queryFn: ({ pageParam }) => getAuctionItems(Number(pageParam), state),
+    queryKey: [AUCTION_ITEMS, state, keyWord],
+    queryFn: ({ pageParam }) => getAuctionItems(Number(pageParam), state, keyWord),
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.pagenation.hasNextPage ? lastPage.pagenation.currentPage + 1 : undefined,
