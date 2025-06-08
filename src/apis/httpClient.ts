@@ -31,8 +31,6 @@ axios.interceptors.response.use(
     const request = error.config;
 
     if ((error.response?.status === 401 || error.response?.status === 406) && !request._retry) {
-      request._retry = true;
-
       localStorage.removeItem(ACCESS_TOKEN);
       window.location.href = '/login';
     }
