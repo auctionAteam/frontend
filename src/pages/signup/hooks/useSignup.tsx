@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import InputAddressModal from '@/components/account/inputAddressModal';
+import useUserSignup from '@/hooks/apis/users/useUserSignup';
 import { useModalStore } from '@/store/useModalStore';
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex, phoneNumberRegex } from '@/utils/regExp';
 
 const useSignup = () => {
   const { openModal } = useModalStore();
+  const navigate = useNavigate();
 
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [address, setAddress] = useState('');
@@ -16,6 +20,13 @@ const useSignup = () => {
     userName: '',
     phoneNumber: '',
     address: '',
+  });
+
+  const { mutate: userSignup } = useUserSignup({
+    onSuccess: () => {
+      toast.success('회원가입 성공!');
+      navigate('/login');
+    },
   });
 
   const onClickChangePasswordType = () => {
@@ -69,7 +80,10 @@ const useSignup = () => {
     setErrorState(errorValidate.errors);
 
     if (!errorValidate.hasError) {
-      console.log('회원가입 API 호출 함수가 들어갈 부분');
+      userSignup({ email, password, name: userName, phoneNum: phoneNumber, address });
+
+      setAddress('');
+      e.currentTarget.reset();
     }
   };
 

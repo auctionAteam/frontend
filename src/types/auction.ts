@@ -1,10 +1,10 @@
 export type AuctionItemType = {
   id: number;
-  thumbnail: string;
-  name: string;
-  description?: string;
-  startTime?: string;
-  endTime: string;
+  img: string[];
+  itemName: string;
+  priceUnit: number;
   startPrice: number;
-  sellerName: string;
+  startTime: string;
+  endTime: string;
+  userName: string;
 };

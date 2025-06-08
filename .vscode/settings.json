@@ -16,5 +16,17 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "cSpell.words": ["bname", "Daum", "jibun", "Pretendard", "prms", "sido", "sigungu", "VITE", "zonecode"]
+  "cSpell.words": [
+    "bname",
+    "Daum",
+    "jibun",
+    "lukemorales",
+    "pagenation",
+    "Pretendard",
+    "prms",
+    "sido",
+    "sigungu",
+    "VITE",
+    "zonecode"
+  ]
 }

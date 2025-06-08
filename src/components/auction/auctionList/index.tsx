@@ -1,22 +1,28 @@
 import styled from '@emotion/styled';
 
-import AuctionItem from '@/components/common/AuctionItem';
-import { AUCTION_LIST } from '@/fixtures/auctionList.dummy';
+import { AuctionItem } from '@/components/common';
 import useDeviceSize from '@/hooks/useDeviceSize';
+import type { AuctionItemType } from '@/types/auction';
 
-const AuctionList = () => {
+type AuctionListProps = {
+  auctionItems: AuctionItemType[];
+};
+
+const AuctionList = ({ auctionItems }: AuctionListProps) => {
   const { isMobile, isItemListTablet, isItemListDesktop } = useDeviceSize();
 
   return (
-    <StyledAuctionList
-      isMobile={isMobile}
-      isItemListTablet={isItemListTablet}
-      isItemListDesktop={isItemListDesktop}
-    >
-      {AUCTION_LIST.map((auctionItem) => (
-        <AuctionItem key={auctionItem.id} {...auctionItem} />
-      ))}
-    </StyledAuctionList>
+    <>
+      <StyledAuctionList
+        isMobile={isMobile}
+        isItemListTablet={isItemListTablet}
+        isItemListDesktop={isItemListDesktop}
+      >
+        {auctionItems.map((auctionItem, idx) => (
+          <AuctionItem key={idx} {...auctionItem} />
+        ))}
+      </StyledAuctionList>
+    </>
   );
 };
 
@@ -27,8 +33,6 @@ const StyledAuctionList = styled.div<{
   isItemListTablet?: boolean;
   isItemListDesktop?: boolean;
 }>`
-  padding-top: 50px;
-  padding-bottom: 90px;
   display: grid;
   gap: 15px;
   grid-template-columns: ${({ isMobile, isItemListTablet, isItemListDesktop }) => {

@@ -1,11 +1,25 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
+import { ACCESS_TOKEN } from '@/constants/token';
+import useUserLogin from '@/hooks/apis/users/useUserLogin';
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex } from '@/utils/regExp';
 
 const useLogin = () => {
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [errorState, setErrorState] = useState<{ [key: string]: string }>({ email: '', password: '' });
+  const navigate = useNavigate();
+
+  const { mutate: userLogin } = useUserLogin({
+    onSuccess: (response) => {
+      localStorage.setItem(ACCESS_TOKEN, response.token);
+
+      toast.success('로그인 성공!');
+      navigate('/');
+    },
+  });
 
   const onClickChangePasswordType = () => {
     setIsPasswordType(!isPasswordType);
@@ -37,7 +51,9 @@ const useLogin = () => {
     setErrorState(errorValidate.errors);
 
     if (!errorValidate.hasError) {
-      console.log('로그인 API 호출 함수가 들어갈 부분');
+      userLogin({ email, password });
+
+      e.currentTarget.reset();
     }
   };
 
