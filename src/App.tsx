@@ -1,15 +1,7 @@
-import styled from '@emotion/styled';
-import ProductDetailPage from './pages/ProductDetailPage';
+import MainPage from './pages/main';
 
 function App() {
-  return <ProductDetailPage />;
+  return <MainPage />;
 }
-// =======
-// import MainPage from './pages/main';
-
-// function App() {
-//   return <MainPage />;
-// >>>>>>> feat-main-page-publishing
-// }
 
 export default App;
