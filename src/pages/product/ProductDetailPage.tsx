@@ -4,6 +4,7 @@ import ProductCard from '@/components/detailProduct/ProductCard';
 import ProductImage from '@/components/detailProduct/ProductImage';
 import type { Bid } from '@/types/product';
 import styled from '@emotion/styled';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const ProductDetailPageStyle = styled.div`
@@ -77,6 +78,9 @@ const bidList = [
 const ProductDetailPage = () => {
   const [status, setStatus] = useState('wait');
   const [newBidList, setNewBidList] = useState<Bid[]>(bidList);
+  const [email, setEmail] = useState('seok@example.com'); // 예시 이메일
+  const [userInfo, setUserInfo] = useState(null);
+  const [images, setImages] = useState('')
   const handleTest = () => {
     if (status === 'wait') {
       setStatus('active');
@@ -84,15 +88,28 @@ const ProductDetailPage = () => {
       setStatus('end');
     } else setStatus('wait');
   };
+
+  const fetchItems = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/items/${5}`);
+  
+        setImages(JSON.parse(response.data[0].img))
+    } catch (err) {
+      console.error("요청 에러:", err);
+    }
+  };
+
+
   useEffect(() => {
-    console.log(newBidList);
-  }, [newBidList]);
+    fetchItems();
+  }, []);
   return (
     <ProductDetailPageStyle>
       <div className="pageBox">
         <div className="pageTopBox">
           <ProductImage
-            imageUrl="https://i.namu.wiki/i/GUS1kGPpvyruUnCfZY6dn7vtmgVdvsFZyB2JtdpLC7v0PBf7EKB0C_dPRenTQDkcEfUkDSvJZnLFYNpUSawcvg.webp"
+            imageUrl={images[0]}
+            
             title="황혼 속의 정원"
           />
           <ProductCard status={status} />

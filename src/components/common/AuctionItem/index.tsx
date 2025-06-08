@@ -12,8 +12,9 @@ import Text from '../Text';
 
 const AuctionItem = forwardRef(
   ({ thumbnail, name, endTime, startPrice, sellerName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
+   
     return (
-      <StyledActionItem ref={ref}>
+      <StyledActionItem ref={ref} >
         <StyledThumbnailWrapper>
           <img src={thumbnail} alt="item-image" />
         </StyledThumbnailWrapper>

@@ -54,7 +54,7 @@ const ProductCard: React.FC<BidHistoryProps> = ({ status }) => {
 
 const ProductCardStyle = styled.div<BidHistoryProps>`
   background-color: white;
-  /* border-color: rgb(226, 232, 240); */
+
   width: 50%;
   border-radius: 8px;
   border: 0.8px solid rgb(2, 8, 23);

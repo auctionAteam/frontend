@@ -11,7 +11,6 @@ const DefaultLayout = () => {
       <Header />
       <Outlet />
       <Footer />
-
       <Modal />
     </>
   );

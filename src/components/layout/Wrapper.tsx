@@ -15,8 +15,5 @@ const StyledWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
-=======
   padding: 0 16px;
->>>>>>> origin/feat/#13
 `;

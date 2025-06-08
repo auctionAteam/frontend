@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 import InputAddressModal from '@/components/account/inputAddressModal';
+import useUserSignup from '@/hooks/apis/users/useUserSignup';
+
 import { useModalStore } from '@/store/useModalStore';
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex, phoneNumberRegex } from '@/utils/regExp';
@@ -16,6 +18,13 @@ const useSignup = () => {
     userName: '',
     phoneNumber: '',
     address: '',
+  });
+
+  const { mutate: userSignup } = useUserSignup({
+    onSuccess: () => {
+      // toast 들어가야함
+      console.log('성공');
+    },
   });
 
   const onClickChangePasswordType = () => {
@@ -70,6 +79,10 @@ const useSignup = () => {
 
     if (!errorValidate.hasError) {
       console.log('회원가입 API 호출 함수가 들어갈 부분');
+
+      userSignup({ email, password, name: userName, phoneNum: phoneNumber, address });
+
+      e.currentTarget.reset();
     }
   };
 
