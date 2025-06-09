@@ -7,6 +7,7 @@ import RegisterPage from '@/pages/register';
 import SignupPage from '@/pages/signup';
 
 import DefaultLayout from './default';
+import ProductDetailPage from '@/pages/product/ProductDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <App />,
       },
+
       {
         path: '/mypage',
         element: <MyPage />,
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
         path: '/register',
         element: <RegisterPage />,
       },
+
       {
         path: '/login',
         element: <LoginPage />,
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignupPage />,
+      },
+      {
+        path: '/detailPage',
+        element: <ProductDetailPage />,
       },
     ],
   },

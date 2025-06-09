@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ACCESS_TOKEN } from '@/constants/token';
@@ -45,7 +46,9 @@ const wrapperStyle = css`
   width: 100%;
   height: 70px;
   position: fixed;
+
   z-index: 999;
+
   background-color: white;
   border-bottom: 1px solid ${colors.gray100};
 `;
@@ -59,5 +62,14 @@ const StyledHeader = styled.div`
 
   img {
     cursor: pointer;
+  }
+
+  .navMenuWrapper {
+    display: flex;
+    gap: 25px;
+
+    span {
+      cursor: pointer;
+    }
   }
 `;

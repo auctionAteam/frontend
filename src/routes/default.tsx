@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Modal from '@/components/common/Modal';
+
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 

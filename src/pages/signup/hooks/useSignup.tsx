@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import InputAddressModal from '@/components/account/inputAddressModal';
 import useUserSignup from '@/hooks/apis/users/useUserSignup';
+
 import { useModalStore } from '@/store/useModalStore';
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex, phoneNumberRegex } from '@/utils/regExp';
@@ -80,6 +81,8 @@ const useSignup = () => {
     setErrorState(errorValidate.errors);
 
     if (!errorValidate.hasError) {
+      console.log('회원가입 API 호출 함수가 들어갈 부분');
+
       userSignup({ email, password, name: userName, phoneNum: phoneNumber, address });
 
       setAddress('');
