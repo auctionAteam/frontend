@@ -9,11 +9,14 @@ import { getRemainingTime } from '@/utils/date';
 
 import Flex from '../Flex';
 import Text from '../Text';
+import { useNavigate } from 'react-router-dom';
 
 const AuctionItem = forwardRef(
-  ({ img, itemName, endTime, startPrice, userName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
+  ({ id, img, itemName, endTime, startPrice, userName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
+    const navigate = useNavigate();
+
     return (
-      <StyledActionItem ref={ref}>
+      <StyledActionItem ref={ref} onClick={() => navigate(`/detailPage/${id}`)}>
         <StyledThumbnailWrapper>
           <img src={img[0]} alt="item-image" />
         </StyledThumbnailWrapper>
