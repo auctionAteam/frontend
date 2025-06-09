@@ -24,9 +24,5 @@ const wrapperStyle = css`
 `;
 
 const containerStyle = css`
-<<<<<<< HEAD
-  padding-top: 80px;
-=======
   padding-top: 110px;
->>>>>>> origin/feat/#13
 `;
