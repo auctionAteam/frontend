@@ -13,7 +13,7 @@ const FavoriteItem = () => {
       limit: 10,
       currentPage: 1,
     },
-    // 전체 조회 
+    // 전체조회 
   });
 
   console.log('userItems:', userItems);
