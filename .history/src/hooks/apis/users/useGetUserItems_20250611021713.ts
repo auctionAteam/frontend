@@ -1,19 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import { getUserItems } from "@/apis/users";
-import type { GetUserItemsParams, GetUserItemsRequestBody, GetUserItemsResponseItem } from "@/apis/users";
+import { useQuery } from '@tanstack/react-query';
+import { getUserItems } from '@/apis/users';
+import type { GetUserItemsParams, GetUserItemsRequestBody, GetUserItemsResponseItem } from '@/apis/users';
 
 type UseGetItemsProps = {
-    params: GetUserItemsParams;
-    body?: GetUserItemsRequestBody;
+  params: GetUserItemsParams;
+  body?: GetUserItemsRequestBody;
 };
 
 const useGetUserItems = ({ params, body }: UseGetItemsProps) => {
-    const queryKey = ['userItems', params.limit, params.currentPage, body?.state ?? 'all'];
+  const queryKey = ['userItems', params.limit, params.currentPage, body?.state ?? 'all'];
 
-    return useQuery<GetUserItemsResponseItem[]>({
-        queryKey,
-        queryFn: () => getUserItems(params, body),
-    });
+  return useQuery<GetUserItemsResponseItem[]>({
+    queryKey,
+    queryFn: () => getUserItems(params, body),
+  });
 };
 
 export default useGetUserItems;

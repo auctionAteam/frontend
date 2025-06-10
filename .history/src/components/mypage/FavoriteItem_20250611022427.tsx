@@ -4,7 +4,11 @@ import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
 const FavoriteItem = () => {
-  const { data: userItems, isLoading, isError } = useGetUserItems({
+  const {
+    data: userItems,
+    isLoading,
+    isError,
+  } = useGetUserItems({
     params: {
       limit: 10,
       currentPage: 1,
@@ -26,7 +30,7 @@ const FavoriteItem = () => {
           <div>관심 등록한 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? (
           userItems.map((item, index) => (
-            <AuctionItemCard 
+            <AuctionItemCard
               key={index}
               item={{
                 id: index,
@@ -34,7 +38,7 @@ const FavoriteItem = () => {
                 thumbnail: item.img,
                 description: '',
                 startTime: item.startTime,
-                startPrice: item.startPrice
+                startPrice: item.startPrice,
               }}
               priceLabel="현재 입찰가"
             />

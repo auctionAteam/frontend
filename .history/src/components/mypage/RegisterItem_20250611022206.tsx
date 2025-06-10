@@ -4,14 +4,18 @@ import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
 const RegisterItem = () => {
-  const { data: userItems, isLoading, isError } = useGetUserItems({
+  const {
+    data: userItems,
+    isLoading,
+    isError,
+  } = useGetUserItems({
     params: {
       limit: 10,
       currentPage: 1,
     },
     body: {
-      state: 'before'
-    }
+      state: 'before',
+    },
   });
 
   console.log('userItems:', userItems);
@@ -28,7 +32,7 @@ const RegisterItem = () => {
           <div>경매에 등록한 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? (
           userItems.map((item, index) => (
-            <AuctionItemCard 
+            <AuctionItemCard
               key={index}
               item={{
                 id: index,
@@ -36,7 +40,7 @@ const RegisterItem = () => {
                 thumbnail: item.img,
                 description: '',
                 startTime: item.startTime,
-                startPrice: item.startPrice
+                startPrice: item.startPrice,
               }}
               priceLabel="현재 입찰가"
             />
@@ -76,4 +80,4 @@ const ItemList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`; 
+`;
