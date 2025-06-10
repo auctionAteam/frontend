@@ -2,5 +2,18 @@ export type Bid = {
   id: number;
   name?: string;
   time?: string;
-  money: number;
+  price: number;
+};
+
+export type ActionItem = {
+  userId: number;
+  img: string[];
+  name: string;
+  startTime: string;
+  startPrice: number;
+  endPrice: number;
+  PriceUnit: number;
+  size: string;
+  infomation: string;
+  state: string;
 };

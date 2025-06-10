@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import type { Bid } from '@/types/product';
-import WaitBox from './bidBox/WaitBox';
-import ActiveBox from './bidBox/activeBox';
+import BeforeBox from './bidBox/BeforeBox';
+import AuctionBox from './bidBox/AuctionBox';
+import { bidAuction, startAuction, type TimeParts } from '@/apis/auction';
+import { getRemainingTime } from '@/utils/timeUtils';
+import toast from 'react-hot-toast';
 
 const BidBoxStyle = styled.div`
   background-color: white;
@@ -24,63 +27,102 @@ const BidBoxStyle = styled.div`
 
 interface BidHistoryProps {
   status: string;
+  fetchItem: () => void; 
+  itemId: number;
   bidList: Bid[];
   setBidList: React.Dispatch<React.SetStateAction<Bid[]>>;
+  startPrice: number;
+  endPrice: number;
+  priceUnit: number;
+  token: string;
+  buyerId: number;
+  startTime: string;
 }
-const BidBox: React.FC<BidHistoryProps> = ({ status, setBidList, bidList }) => {
-  const initialSeconds = 1 * 24 * 60 * 60 + 23 * 60 * 60 + 24 * 60 + 39;
-  const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
-  const [nowBidMoney, setNowBidMoeny] = useState(20000);
+
+const BidBox: React.FC<BidHistoryProps> = ({
+  status,
+  fetchItem,
+  startTime,
+  endPrice,
+  priceUnit,
+  buyerId,
+  token,
+  itemId,
+}) => {
+  const [timeParts, setTimeParts] = useState<TimeParts>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  const [nowBidMoney, setNowBidMoney] = useState<number>(endPrice);
   const [bidNum, setBidNum] = useState(0);
 
-  const days = Math.floor(secondsLeft / (24 * 60 * 60));
-  const hours = Math.floor((secondsLeft % (24 * 60 * 60)) / 3600);
-  const minutes = Math.floor((secondsLeft % 3600) / 60);
-  const seconds = secondsLeft % 60;
-
   const handleBid = (r: number) => {
-    setBidNum(r * nowBidMoney);
+    setBidNum(r * priceUnit + nowBidMoney);
   };
+
   const handleBidMoney = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBidNum(Number(e.target.value));
   };
 
-  const handleBidCheck = () => {
-    setBidList([
-      {
-        id: 11,
-        name: 'dd',
-        time: '00',
-        money: bidNum,
-      },
-      ...bidList,
-    ]);
-    setBidNum(0);
+  const handleBidCheck = async () => {
+    if (!token) {
+      alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+      return;
+    }
+    try {
+      if (status === 'before') {
+        const result = await startAuction({
+            itemId: itemId,
+            token: token,
+          });
+          
+          toast.success('첫 입찰 성공');
+          fetchItem()
+      } else {
+        // 실제 입찰 요청 주석 해제 필요
+        // const result = await bidAuction({
+        //   itemId: itemId,
+        //   buyerId: buyerId,
+        //   price: bidNum,
+        //   token: token,
+        // });
+        console.log('입찰 성공:', itemId, buyerId, bidNum, token);
+        setBidNum(0);
+      }
+    } catch (err) {
+      console.error('에러 발생:', err);
+      alert('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
-
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => prev - 1);
+      setTimeParts(getRemainingTime(startTime));
     }, 1000);
-
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [startTime]);
+
+  const { days, hours, minutes, seconds } = timeParts;
+
   return (
     <BidBoxStyle>
       <div className="title">
-        {status === 'wait'
+        {status === 'before'
           ? 'Auction Starts In'
-          : status === 'active'
+          : status === 'auction'
             ? 'Place Your Bid'
             : 'Auction Completed'}
       </div>
-      {status === 'wait' ? (
-        <WaitBox days={days} hours={hours} minutes={minutes} seconds={seconds} />
-      ) : status === 'active' ? (
-        <ActiveBox
+
+      {status === 'before' ? (
+        <BeforeBox days={days} hours={hours} minutes={minutes} seconds={seconds} handleAuction={handleBidCheck} />
+      ) : status === 'auction' ? (
+        <AuctionBox
           nowBidMoney={nowBidMoney}
+          priceUnit={priceUnit}
           bidNum={bidNum}
           handleBid={handleBid}
           handleBidCheck={handleBidCheck}

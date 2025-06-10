@@ -14,9 +14,11 @@ type UserSignupResponseOptionType = {
 };
 
 const postUserLogin = async ({ email, password }: UserLoginResponseOptionType) => {
-  return await httpClient.post('/users/login', { email, password }).then((response) => response.data);
+  return await httpClient.post('/users/login', { email, password }).then((response) => {
+    localStorage.setItem('userId', response.data.loginUser.id);
+    return response.data;
+  });
 };
-
 const postUserSignup = async ({ email, password, name, phoneNum, address }: UserSignupResponseOptionType) => {
   return await httpClient
     .post('/users/join', { email, password, name, phoneNum, address })

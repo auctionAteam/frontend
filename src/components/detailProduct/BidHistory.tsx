@@ -90,14 +90,14 @@ const BidHistory: React.FC<BidHistoryProps> = ({ status, bidList }) => {
   return (
     <BidHistoryStyle>
       <h3 className="title">Bid History</h3>
-      {status === 'wait' && (
+      {status === 'before' && (
         <>
           <div className="bitHistoryBox" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
             경매가 아직 시작되지 않았습니다. 시작되면 다시 확인해 주세요.
           </div>
         </>
       )}
-      {status === 'active' && (
+      {status === 'auction' && (
         <div className="bitHistoryBox">
           {bidList.map((b) => {
             return (
@@ -109,7 +109,7 @@ const BidHistory: React.FC<BidHistoryProps> = ({ status, bidList }) => {
                     <div className="bidTime">{b.time}</div>
                   </div>
                 </div>
-                <div className="historyRightBox">{b.money} 원</div>
+                <div className="historyRightBox">{b.price} 원</div>
               </div>
             );
           })}

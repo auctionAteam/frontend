@@ -22,9 +22,12 @@ const ProductImageStyle = styled.div`
 `;
 
 const ProductImage: React.FC<ProductImageProps> = ({ imageUrl, title }) => {
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = '/images/basic_image.jpg';
+  };
   return (
     <ProductImageStyle>
-      <img src={imageUrl} alt={title} className="imgArea" />
+      <img src={imageUrl} alt={title} className="imgArea" onError={handleError} />
     </ProductImageStyle>
   );
 };

@@ -16,7 +16,7 @@ const AuctionItem = forwardRef(
     const navigate = useNavigate();
 
     return (
-      <StyledActionItem ref={ref} onClick={() => navigate(`/detailPage/${id}`)}>
+      <StyledActionItem ref={ref} onClick={() => navigate(`/detailPage/${id}`, { state: { id } })}>
         <StyledThumbnailWrapper>
           <img src={img[0]} alt="item-image" />
         </StyledThumbnailWrapper>

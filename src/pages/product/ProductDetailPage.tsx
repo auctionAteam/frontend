@@ -1,11 +1,15 @@
+import { getItem, getItemStatusOnly, type UserInfomation } from '@/apis/auction';
 import BidBox from '@/components/detailProduct/BidBox';
 import BidHistory from '@/components/detailProduct/BidHistory';
 import ProductCard from '@/components/detailProduct/ProductCard';
 import ProductImage from '@/components/detailProduct/ProductImage';
-import type { Bid } from '@/types/product';
+
+import type { ActionItem, Bid } from '@/types/product';
 import styled from '@emotion/styled';
-import axios from 'axios';
+
+import { ACCESS_TOKEN } from '@/constants/token';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const ProductDetailPageStyle = styled.div`
   padding: 16px 32px;
@@ -53,65 +57,102 @@ const bidList = [
     id: 0,
     name: 'kim',
     time: '4 hours ago',
-    money: 20000,
+    price: 20000,
   },
   {
     id: 1,
     name: 'seok',
     time: '5 hours ago',
-    money: 18000,
+    price: 18000,
   },
   {
     id: 2,
     name: 'woo',
     time: '6 hours ago',
-    money: 16000,
+    price: 16000,
   },
   {
     id: 3,
     name: 'check',
     time: '12 hours ago',
-    money: 14000,
+    price: 14000,
   },
 ];
 
 const ProductDetailPage = () => {
-  const [status, setStatus] = useState('wait');
+  const location = useLocation();
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  const userId = Number(localStorage.getItem('userId'));
+  const { id } = location.state || {};
+
+  const [status, setStatus] = useState<string>('before');
   const [newBidList, setNewBidList] = useState<Bid[]>(bidList);
-  const [email, setEmail] = useState('seok@example.com'); // 예시 이메일
-  const [userInfo, setUserInfo] = useState(null);
-  const [images, setImages] = useState('');
-  const handleTest = () => {
-    if (status === 'wait') {
-      setStatus('active');
-    } else if (status === 'active') {
-      setStatus('end');
-    } else setStatus('wait');
+  const [item, setItem] = useState<ActionItem>();
+  const [images, setImages] = useState<string[]>([]);
+  const [userInfo, setUserInfo] = useState<UserInfomation | null>(null);
+
+  
+  const fetchItem = () => {
+    if (!id) return;
+    getItem({
+      id,
+      setItem,
+      setImages,
+      setStatus,
+    });
   };
 
-  const fetchItems = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/items/${5}`);
+  const fetchItemStatusOnly = () => {
+    if (!id) return;
+    getItemStatusOnly({
+      id,
+      setItem,
+      setStatus,
+    });
+  };
+  
+  useEffect(() => {
+    fetchItem(); 
+  }, [id]);
 
-      setImages(JSON.parse(response.data[0].img));
-    } catch (err) {
-      console.error('요청 에러:', err);
+  
+
+  const handleTest = () => {
+    if (status === 'before') {
+      setStatus('auction');
+    } else if (status === 'auction') {
+      setStatus('end');
+    } else {
+      setStatus('before');
     }
   };
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+  if (!id || !token || !userId) return;
   return (
     <ProductDetailPageStyle>
       <div className="pageBox">
         <div className="pageTopBox">
-          <ProductImage imageUrl={images[0]} title="황혼 속의 정원" />
-          <ProductCard status={status} />
+          <ProductImage imageUrl={images[0]} />
+          {!!item && <ProductCard status={status}  item={item} />}
         </div>
         <div className="pageBottomBox">
           <BidHistory status={status} bidList={newBidList} />
-          <BidBox status={status} setBidList={setNewBidList} bidList={newBidList} />
+          {item && !!item.startPrice && !!item.endPrice && !!item.PriceUnit && (
+            <BidBox
+              status={status}
+              startTime={item.startTime}
+              setBidList={setNewBidList}
+              bidList={newBidList}
+              fetchItem={fetchItemStatusOnly}
+              
+              startPrice={item.startPrice}
+              buyerId={userId}
+              token={token}
+              itemId={id}
+              endPrice={item.endPrice}
+              priceUnit={item.PriceUnit}
+            />
+          )}
         </div>
       </div>
       <button className="testBtn" onClick={handleTest}>
