@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-
 import AuctionItemCard from '@/components/mypage/AuctionItemCard';
 import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
@@ -14,7 +13,7 @@ const FavoriteItem = () => {
       limit: 10,
       currentPage: 1,
     },
-    // 전체 조회 
+    // 전체조회 
   });
 
   console.log('userItems:', userItems);
