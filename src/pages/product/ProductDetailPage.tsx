@@ -91,7 +91,6 @@ const ProductDetailPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [userInfo, setUserInfo] = useState<UserInfomation | null>(null);
 
-  
   const fetchItem = () => {
     if (!id) return;
     getItem({
@@ -110,12 +109,10 @@ const ProductDetailPage = () => {
       setStatus,
     });
   };
-  
-  useEffect(() => {
-    fetchItem(); 
-  }, [id]);
 
-  
+  useEffect(() => {
+    fetchItem();
+  }, [id]);
 
   const handleTest = () => {
     if (status === 'before') {
@@ -133,7 +130,7 @@ const ProductDetailPage = () => {
       <div className="pageBox">
         <div className="pageTopBox">
           <ProductImage imageUrl={images[0]} />
-          {!!item && <ProductCard status={status}  item={item} />}
+          {!!item && <ProductCard status={status} item={item} />}
         </div>
         <div className="pageBottomBox">
           <BidHistory status={status} bidList={newBidList} />
@@ -144,7 +141,6 @@ const ProductDetailPage = () => {
               setBidList={setNewBidList}
               bidList={newBidList}
               fetchItem={fetchItemStatusOnly}
-              
               startPrice={item.startPrice}
               buyerId={userId}
               token={token}

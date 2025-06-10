@@ -14,7 +14,6 @@ const ProductCard: React.FC<BidHistoryProps> = ({ status, item }) => {
   return (
     <CardContainer status={status}>
       <Section>
-        
         <Title>{item.name}</Title>
         <LikeBtn />
       </Section>

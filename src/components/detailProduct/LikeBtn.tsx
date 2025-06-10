@@ -7,16 +7,14 @@ interface LikeBtnProps {
   initialFavorited?: boolean;
   onToggle?: (favorited: boolean) => void;
   disabled?: boolean;
- 
 }
 
-const LikeBtn = ({ initialFavorited = false, onToggle, disabled = false, }: LikeBtnProps) => {
+const LikeBtn = ({ initialFavorited = false, onToggle, disabled = false }: LikeBtnProps) => {
   const [isLiked, setIsLiked] = useState(initialFavorited);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleFavorite = () => {
     if (disabled || isLoading) return;
-    
 
     setIsLoading(true);
     setTimeout(() => {
@@ -28,17 +26,12 @@ const LikeBtn = ({ initialFavorited = false, onToggle, disabled = false, }: Like
   };
 
   return (
-    <LikeBtnStyle
-      isFavorited={isLiked}
-      disabled={disabled}
-      isLoading={isLoading}
-
-    >
+    <LikeBtnStyle isFavorited={isLiked} disabled={disabled} isLoading={isLoading}>
       <button
         type="button"
         onClick={handleToggleFavorite}
         disabled={disabled || isLoading}
-        aria-label={isLiked ? "Remove from favorites" : "Add to favorites"}
+        aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
       >
         <FaHeart />
       </button>

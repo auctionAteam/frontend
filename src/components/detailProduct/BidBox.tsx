@@ -27,7 +27,7 @@ const BidBoxStyle = styled.div`
 
 interface BidHistoryProps {
   status: string;
-  fetchItem: () => void; 
+  fetchItem: () => void;
   itemId: number;
   bidList: Bid[];
   setBidList: React.Dispatch<React.SetStateAction<Bid[]>>;
@@ -75,12 +75,12 @@ const BidBox: React.FC<BidHistoryProps> = ({
     try {
       if (status === 'before') {
         const result = await startAuction({
-            itemId: itemId,
-            token: token,
-          });
-          
-          toast.success('첫 입찰 성공');
-          fetchItem()
+          itemId: itemId,
+          token: token,
+        });
+
+        toast.success('첫 입찰 성공');
+        fetchItem();
       } else {
         // 실제 입찰 요청 주석 해제 필요
         // const result = await bidAuction({
@@ -118,7 +118,13 @@ const BidBox: React.FC<BidHistoryProps> = ({
       </div>
 
       {status === 'before' ? (
-        <BeforeBox days={days} hours={hours} minutes={minutes} seconds={seconds} handleAuction={handleBidCheck} />
+        <BeforeBox
+          days={days}
+          hours={hours}
+          minutes={minutes}
+          seconds={seconds}
+          handleAuction={handleBidCheck}
+        />
       ) : status === 'auction' ? (
         <AuctionBox
           nowBidMoney={nowBidMoney}

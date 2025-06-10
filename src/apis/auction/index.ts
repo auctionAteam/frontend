@@ -69,13 +69,11 @@ export const getItem = async ({
   setItem,
   setImages,
   setStatus,
-
 }: {
   id: number;
   setItem: (item: any) => void;
   setImages: (images: string[]) => void;
   setStatus: (status: string) => void;
-
 }) => {
   try {
     const response = await axios.get(`${baseURL}/items/${id}`);
@@ -83,7 +81,6 @@ export const getItem = async ({
     setItem(itemData);
     setStatus(itemData.state);
     setImages(JSON.parse(itemData.img));
-    
   } catch (err) {
     console.error('요청 에러:', err);
   }
@@ -112,7 +109,7 @@ export const handleLike = async (
   itemId: number,
   email: string,
   setIsLiked: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   setIsLoading(true);
 
@@ -123,9 +120,8 @@ export const handleLike = async (
     setIsLiked(newLikeStatus);
   } catch (error: any) {
     console.error(error);
-    alert(error.response?.data?.message || "오류가 발생했습니다.");
+    alert(error.response?.data?.message || '오류가 발생했습니다.');
   } finally {
     setIsLoading(false);
   }
 };
-
