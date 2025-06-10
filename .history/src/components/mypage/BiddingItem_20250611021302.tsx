@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-
 import AuctionItemCard from '@/components/mypage/AuctionItemCard';
 import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
-const MyWinItem = () => {
+const BiddingItem = () => {
   const {
     data: userItems,
     isLoading,
@@ -15,35 +14,35 @@ const MyWinItem = () => {
       currentPage: 1,
     },
     body: {
-      state: 'closed',
+      state: 'auction',
     },
   });
 
-  console.log('userItems:', userItems);
+  console.log('userItems:', userItems); //임시 체크용
 
   return (
     <Section>
-      <Title>낙찰된 상품</Title>
+      <Title>입찰 중인 상품</Title>
       <ItemList>
         {isLoading ? (
           <div>Loading..</div>
         ) : isError ? (
           <div>에러 발생!</div>
         ) : Array.isArray(userItems) && userItems.length === 0 ? (
-          <div>낙찰된 상품이 없습니다.</div>
+          <div>입찰 중인 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? (
           userItems.map((item, index) => (
             <AuctionItemCard
               key={index}
               item={{
                 id: index,
-                name: item.name,
+                name: item.itemName,
                 thumbnail: item.img,
                 description: '',
                 startTime: item.startTime,
                 startPrice: item.startPrice,
               }}
-              priceLabel="최종 입찰가"
+              priceLabel="내 입찰가"
             />
           ))
         ) : (
@@ -54,7 +53,7 @@ const MyWinItem = () => {
   );
 };
 
-export default MyWinItem;
+export default BiddingItem;
 
 const Section = styled.section`
   border: #fff;
@@ -63,7 +62,6 @@ const Section = styled.section`
   padding: 24px;
   margin-bottom: 40px;
   transition: all 0.1s ease;
-
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }

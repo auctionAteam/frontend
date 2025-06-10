@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-
-import UserInfoItem from '@/components/mypage/UserInfoItem';
 import useGetUserInfo from '@/hooks/apis/users/useGetUserInfo';
+import UserInfoItem from '@/components/mypage/UserInfoItem';
 import { colors } from '@/styles';
 
 const UsersInfo = () => {

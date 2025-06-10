@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-
-import UserInfoItem from '@/components/mypage/UserInfoItem';
 import useGetUserInfo from '@/hooks/apis/users/useGetUserInfo';
+import UserInfoItem from '@/components/mypage/UserInfoItem';
 import { colors } from '@/styles';
 
 const UsersInfo = () => {
@@ -14,8 +13,8 @@ const UsersInfo = () => {
     <Section>
       <Title>내 정보</Title>
       <InfoGrid>
-        <UserInfoItem label="이름" value={userInfo.name} />
         <UserInfoItem label="이메일" value={userInfo.email} />
+        <UserInfoItem label="이름" value={userInfo.name} />
         <UserInfoItem label="주소" value={userInfo.address} />
         <UserInfoItem label="전화번호" value={userInfo.phoneNum} />
         <UserInfoItem label="가입일" value={userInfo.createAt} />

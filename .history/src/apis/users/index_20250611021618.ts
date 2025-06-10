@@ -1,5 +1,3 @@
-import { USER_EMAIL } from '@/constants/token';
-
 import { httpClient } from '../httpClient';
 
 type UserLoginResponseOptionType = {
@@ -33,7 +31,6 @@ type GetUserItemsParams = {
 };
 
 type GetUserItemsResponseItem = {
-  id: string;
   img: string;
   name: string;
   startTime: string;
@@ -52,29 +49,30 @@ const postUserSignup = async ({ email, password, name, phoneNum, address }: User
 };
 
 const getUserInfo = async () => {
-  const email = localStorage.getItem(USER_EMAIL);
-  return await httpClient.get(`/users/info?email=${email}`).then((response) => response.data[0]);
+  return await httpClient.get('/users/info').then((response) => response.data);
 };
 
 const getUserItems = async (params: GetUserItemsParams, body?: GetUserItemsRequestBody) => {
   const { limit, currentPage } = params;
+  console.log('getUserItems called', params, body); // 디버깅용
   return await httpClient
-    .post('/users/item', {
-      email: localStorage.getItem(USER_EMAIL),
-      limit,
-      currentPage,
-      ...body,
+    .get('/users/item', {
+      params: {
+        limit,
+        currentPage,
+      },
+      data: body,
     })
-    .then((response) => response.data.items);
+    .then((response) => response.data);
 };
 
 export type {
-  GetUserInfoResponse,
-  GetUserItemsParams,
-  GetUserItemsRequestBody,
-  GetUserItemsResponseItem,
   UserLoginResponseOptionType,
   UserSignupResponseOptionType,
+  GetUserInfoResponse,
+  GetUserItemsRequestBody,
+  GetUserItemsParams,
+  GetUserItemsResponseItem,
 };
 
-export { getUserInfo, getUserItems, postUserLogin, postUserSignup };
+export { postUserLogin, postUserSignup, getUserInfo, getUserItems };

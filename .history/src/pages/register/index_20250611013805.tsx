@@ -2,24 +2,15 @@ import styled from '@emotion/styled';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Flex } from '@/components/common';
 import Button from '@/components/common/Button';
 import PageWrapper from '@/components/layout/PageWrapper';
-import usePostItem from '@/hooks/apis/items/usePostItem';
 import { colors } from '@/styles';
 
 const RegisterPage = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
+  const [selectedPeriod, setSelectedPeriod] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-
-  const { mutate: postItem } = usePostItem({
-    onSuccess: () => {
-      alert('상품 등록 성공');
-    },
-    onError: () => {
-      alert('상품 등록 실패');
-    },
-  });
 
   const handleFileClick = () => {
     fileInputRef.current?.click();
@@ -33,20 +24,7 @@ const RegisterPage = () => {
   };
 
   const handleRegister = () => {
-    if (selectedPeriod === null) {
-      alert('경매 기간을 선택해주세요.');
-      return;
-    }
-
-    postItem({
-      email: 'user123@naver.com',
-      name: '테스트 상품',
-      day: selectedPeriod,
-      startPrice: 100000,
-      priceUnit: 10000,
-      size: '세로:100, 가로:200',
-      information: '테스트 상품입니다.',
-    });
+    alert('상품이 등록되었습니다');
   };
 
   return (
@@ -54,6 +32,55 @@ const RegisterPage = () => {
       <RegisterContainer>
         <Title>상품 등록 페이지</Title>
         <SubTitle>새로운 경매 상품을 등록하여 판매를 시작하세요</SubTitle>
+
+        <Card>
+          <CardTitle>상품 정보</CardTitle>
+          <Input type="text" placeholder="상품명을 입력하세요" />
+          <Textarea placeholder="상품 설명" />
+        </Card>
+
+        <Card>
+          <CardTitle>경매 설정</CardTitle>
+          <Flex gap={16} wrap="wrap">
+            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
+              <Label htmlFor="startPrice">시작 입찰가</Label>
+              <Input id="startPrice" type="number" placeholder="0" />
+              <Unit>원</Unit>
+            </Flex>
+            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
+              <Label htmlFor="bidStep">입찰 단위</Label>
+              <Input id="bidStep" type="number" placeholder="0" />
+              <Unit>원</Unit>
+            </Flex>
+          </Flex>
+
+          <PeriodSection>
+            <Label>경매 기간</Label>
+            <Period>
+              {['1일', '1주', '2주', '3주', '4주'].map((label) => (
+                <PeriodButton
+                  key={label}
+                  isActive={selectedPeriod === label}
+                  onClick={() => setSelectedPeriod(label)}
+                >
+                  {label}
+                </PeriodButton>
+              ))}
+            </Period>
+          </PeriodSection>
+        </Card>
+
+        <Card>
+          <CardTitle>상품 이미지</CardTitle>
+          <UploadImg>
+            <Plus>+</Plus>
+            <div>이미지를 드래그하거나 클릭하여 업로드</div>
+            <DescImg>JPG, PNG 파일만 지원됩니다.</DescImg>
+            <UploadButton onClick={handleFileClick}>파일 선택</UploadButton>
+            <input type="file" hidden ref={fileInputRef} onChange={handleFileChange} accept="image/*" />
+          </UploadImg>
+        </Card>
+
         <DecisionButton>
           <Button
             styleType="ghost"
@@ -73,7 +100,6 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
 
 const RegisterContainer = styled.div`
   max-width: 700px;

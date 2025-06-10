@@ -9,5 +9,4 @@ export type AuctionItemType = {
   userName: string;
   name: string;
   thumbnail: string;
-  description: string;
 };
