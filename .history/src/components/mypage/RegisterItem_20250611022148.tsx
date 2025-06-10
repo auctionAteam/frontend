@@ -3,27 +3,29 @@ import AuctionItemCard from '@/components/mypage/AuctionItemCard';
 import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
-const FavoriteItem = () => {
+const RegisterItem = () => {
   const { data: userItems, isLoading, isError } = useGetUserItems({
     params: {
       limit: 10,
       currentPage: 1,
     },
-    // body 없음 → 전체 조회
+    body: {
+      state: 'before'
+    }
   });
 
   console.log('userItems:', userItems);
 
   return (
     <Section>
-      <Title>관심 등록한 상품</Title>
+      <Title>경매에 등록한 상품</Title>
       <ItemList>
         {isLoading ? (
           <div>Loading..</div>
         ) : isError ? (
           <div>에러 발생!</div>
         ) : Array.isArray(userItems) && userItems.length === 0 ? (
-          <div>관심 등록한 상품이 없습니다.</div>
+          <div>경매에 등록한 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? (
           userItems.map((item, index) => (
             <AuctionItemCard 
@@ -47,46 +49,6 @@ const FavoriteItem = () => {
   );
 };
 
-export default FavoriteItem;
+export default RegisterItem;
 
-const Section = styled.section`
-  border: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding: 24px;
-  margin-bottom: 40px;
-  transition: all 0.1s ease;
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 24px;
-  margin-bottom: 20px;
-  border-bottom: thin solid ${colors.gray200};
-  padding-bottom: 12px;
-`;
-
-const ItemList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
-
-const Field = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const Label = styled.span`
-  font-weight: 600;
-`;
-
-const SellerValue = styled.span`
-  color: ${colors.gray300};
-  font-weight: bold;
-  margin-bottom: 6px;
-`;
+// Styled components는 BiddingItem.tsx와 동일 → 그대로 사용
