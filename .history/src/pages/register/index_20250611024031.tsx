@@ -74,7 +74,6 @@ const RegisterPage = () => {
 
 export default RegisterPage;
 
-
 const RegisterContainer = styled.div`
   max-width: 700px;
   margin: 0 auto;

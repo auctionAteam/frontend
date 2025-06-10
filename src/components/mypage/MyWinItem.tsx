@@ -4,14 +4,18 @@ import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
 const MyWinItem = () => {
-  const { data: userItems, isLoading, isError } = useGetUserItems({
+  const {
+    data: userItems,
+    isLoading,
+    isError,
+  } = useGetUserItems({
     params: {
       limit: 10,
       currentPage: 1,
     },
     body: {
-      state: 'closed'
-    }
+      state: 'closed',
+    },
   });
 
   console.log('userItems:', userItems);
@@ -28,7 +32,7 @@ const MyWinItem = () => {
           <div>낙찰된 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? (
           userItems.map((item, index) => (
-            <AuctionItemCard 
+            <AuctionItemCard
               key={index}
               item={{
                 id: index,
@@ -36,7 +40,7 @@ const MyWinItem = () => {
                 thumbnail: item.img,
                 description: '',
                 startTime: item.startTime,
-                startPrice: item.startPrice
+                startPrice: item.startPrice,
               }}
               priceLabel="최종 입찰가"
             />
