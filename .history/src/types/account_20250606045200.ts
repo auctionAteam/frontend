@@ -19,20 +19,3 @@ export type DaumAddressType = {
   jibunAddress: string;
   detailAddress?: string;
 };
-
-export type AuctionItemType = {
-  id: number;
-  img: string;
-  itemName: string;
-  endTime: string;
-  startPrice: number;
-  userName: string;
-};
-
-export type MyPageItemType = {
-  id: number;
-  img: string;
-  name: string;
-  startTime: string;
-  startPrice: number;
-};

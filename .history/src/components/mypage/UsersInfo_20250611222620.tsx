@@ -1,25 +1,29 @@
 import styled from '@emotion/styled';
 
-import useGetUserInfo from '@/hooks/apis/users/useGetUserInfo';
 import { colors } from '@/styles';
 
 import UserInfoItem from './UserInfoItem';
 
 const UsersInfo = () => {
-  const { data: userInfo, isLoading, isError } = useGetUserInfo();
-
-  if (isLoading) return <div>Loading..</div>;
-  if (isError) return <div>에러 발생!</div>;
+  const user = {
+    id: 'User1234',
+    name: '김철수',
+    phone: '010-1234-5678',
+    email: 'abcd1234@gmail.com',
+    address: '서울시 서초구 반포대로 45',
+    created_at: '2025-01-01',
+  };
 
   return (
     <Section>
       <Title>내 정보</Title>
       <InfoGrid>
-        <UserInfoItem label="이름" value={userInfo!.name} />
-        <UserInfoItem label="이메일" value={userInfo!.email} />
-        <UserInfoItem label="주소" value={userInfo!.address} />
-        <UserInfoItem label="전화번호" value={userInfo!.phoneNum} />
-        <UserInfoItem label="가입일" value={userInfo!.createAt} />
+        <UserInfoItem label="아이디" value={user.id} />
+        <UserInfoItem label="이름" value={user.name} />
+        <UserInfoItem label="이메일" value={user.email} />
+        <UserInfoItem label="전화번호" value={user.phone} />
+        <UserInfoItem label="가입일" value={user.created_at} />
+        <UserInfoItem label="주소" value={user.address} />
       </InfoGrid>
     </Section>
   );

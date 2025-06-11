@@ -1,5 +1,4 @@
-
-import { USER_EMAIL } from '@/constants/token';
+import { USER_EMAIL } from "@/constants/token";
 
 import { httpClient } from '../httpClient';
 
@@ -18,11 +17,19 @@ type UserSignupResponseOptionType = {
 
 type GetUserInfoResponse = {
   email: string;
-  name: string;
+  password: string;
   address: string;
   phoneNum: string;
   createAt: string;
 };
+
+type GetUserItemsResponseItem = {
+  img: string;
+  name: string;
+  startTime: string;
+  startPrice: number;
+  priceUnit: number;
+}
 
 type GetUserItemsRequestBody = {
   state?: 'before' | 'auction' | 'closed'
@@ -32,15 +39,6 @@ type GetUserItemsParams = {
   limit: number;
   currentPage: number;
 };
-
-type GetUserItemsResponseItem = {
-  id: string;
-  img: string;
-  name: string;
-  startTime: string;
-  startPrice: number;
-  priceUnit: number;
-}
 
 const postUserLogin = async ({ email, password }: UserLoginResponseOptionType) => {
   return await httpClient.post('/users/login', { email, password }).then((response) => response.data);
@@ -54,27 +52,27 @@ const postUserSignup = async ({ email, password, name, phoneNum, address }: User
 
 const getUserInfo = async () => {
   const email = localStorage.getItem(USER_EMAIL);
-  return await httpClient.get(`/users/info?email=${email}`).then((response) => response.data[0]);
+  return await httpClient.get(`/users/info?email=${email}`).then((response) => response.data);
 };
 
 const getUserItems = async (params: GetUserItemsParams, body?: GetUserItemsRequestBody) => {
   const { limit, currentPage } = params;
-  return await httpClient.post('/users/item', {
-    email: localStorage.getItem(USER_EMAIL),
-    limit,
-    currentPage,
-    ...body
-  })
-  .then((response) => response.data.items);
-};
+  return await httpClient
+    .get('/users/item', {
+      params: {
+        limit,
+        currentPage
+      },
+      data: body
+    })
+    .then((response) => response.data);
+}
 
 export type { 
   GetUserInfoResponse,
   GetUserItemsParams,
-  GetUserItemsRequestBody,
   GetUserItemsResponseItem, 
   UserLoginResponseOptionType, 
-  UserSignupResponseOptionType
-};
+  UserSignupResponseOptionType};
 
 export { getUserInfo, getUserItems,postUserLogin, postUserSignup };
