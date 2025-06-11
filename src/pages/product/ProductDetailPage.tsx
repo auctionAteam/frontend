@@ -1,4 +1,4 @@
-import { getItem, getItemStatusOnly, type UserInfomation } from '@/apis/auction';
+import { fetchBidHistory, getItem, getItemStatusOnly, getUserInformation, type UserInfomation } from '@/apis/auction';
 import BidBox from '@/components/detailProduct/BidBox';
 import BidHistory from '@/components/detailProduct/BidHistory';
 import ProductCard from '@/components/detailProduct/ProductCard';
@@ -43,7 +43,12 @@ const ProductDetailPageStyle = styled.div`
     margin-top: 32px;
     min-height: 200px;
 
+
+    align-items: stretch; 
     box-sizing: border-box;
+    div {
+      height: 100%;
+    }
   }
   .testBtn {
     position: absolute;
@@ -52,45 +57,22 @@ const ProductDetailPageStyle = styled.div`
   }
 `;
 
-const bidList = [
-  {
-    id: 0,
-    name: 'kim',
-    time: '4 hours ago',
-    price: 20000,
-  },
-  {
-    id: 1,
-    name: 'seok',
-    time: '5 hours ago',
-    price: 18000,
-  },
-  {
-    id: 2,
-    name: 'woo',
-    time: '6 hours ago',
-    price: 16000,
-  },
-  {
-    id: 3,
-    name: 'check',
-    time: '12 hours ago',
-    price: 14000,
-  },
-];
+
 
 const ProductDetailPage = () => {
   const location = useLocation();
   const token = localStorage.getItem(ACCESS_TOKEN);
-  const userId = Number(localStorage.getItem('userId'));
+  const email = localStorage.getItem('email');
+  const buyerId = Number(localStorage.getItem('userId'));
+
   const { id } = location.state || {};
 
   const [status, setStatus] = useState<string>('before');
-  const [newBidList, setNewBidList] = useState<Bid[]>(bidList);
+  const [newBidList, setNewBidList] = useState<Bid[]>([]);
   const [item, setItem] = useState<ActionItem>();
   const [images, setImages] = useState<string[]>([]);
   const [userInfo, setUserInfo] = useState<UserInfomation | null>(null);
-
+  const [nowBidMoney, setNowBidMoney] = useState<number>(0);   
   const fetchItem = () => {
     if (!id) return;
     getItem({
@@ -110,9 +92,26 @@ const ProductDetailPage = () => {
     });
   };
 
+  const getBidHistory = async () => {
+    const result = await fetchBidHistory(
+      id
+    )
+    
+    setNewBidList(result.info)
+  }
+
   useEffect(() => {
     fetchItem();
+    getBidHistory()
   }, [id]);
+  
+  useEffect(() => {
+    setNowBidMoney(
+      newBidList && newBidList.length > 0
+        ? newBidList[0].price
+        : item?.startPrice || 0
+    );
+  }, [newBidList, item]);
 
   const handleTest = () => {
     if (status === 'before') {
@@ -123,8 +122,8 @@ const ProductDetailPage = () => {
       setStatus('before');
     }
   };
-
-  if (!id || !token || !userId) return;
+  
+  if (!id) return;
   return (
     <ProductDetailPageStyle>
       <div className="pageBox">
@@ -134,7 +133,7 @@ const ProductDetailPage = () => {
         </div>
         <div className="pageBottomBox">
           <BidHistory status={status} bidList={newBidList} />
-          {item && !!item.startPrice && !!item.endPrice && !!item.PriceUnit && (
+          {item && !!item.startPrice && !!item.endPrice && !!item.PriceUnit && token && (
             <BidBox
               status={status}
               startTime={item.startTime}
@@ -142,10 +141,10 @@ const ProductDetailPage = () => {
               bidList={newBidList}
               fetchItem={fetchItemStatusOnly}
               startPrice={item.startPrice}
-              buyerId={userId}
+              buyerId={buyerId}
               token={token}
               itemId={id}
-              endPrice={item.endPrice}
+              endPrice={nowBidMoney}
               priceUnit={item.PriceUnit}
             />
           )}

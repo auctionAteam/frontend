@@ -15,7 +15,7 @@ const ProductCard: React.FC<BidHistoryProps> = ({ status, item }) => {
     <CardContainer status={status}>
       <Section>
         <Title>{item.name}</Title>
-        <LikeBtn />
+        <LikeBtn size="medium" />
       </Section>
 
       <DescriptionSection>
@@ -34,7 +34,7 @@ const ProductCard: React.FC<BidHistoryProps> = ({ status, item }) => {
             {status === 'before'
               ? 'No bids yet'
               : status === 'auction'
-                ? `${item.startPrice.toLocaleString()}원`
+                ? `${item.endPrice.toLocaleString()}원`
                 : `${item.toLocaleString()}원`}
           </StrongText>
         </InfoBox>

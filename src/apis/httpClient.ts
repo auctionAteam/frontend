@@ -8,7 +8,7 @@ const httpClient: AxiosInstance = axios.create({
   timeout: 10000,
 });
 
-axios.interceptors.request.use(
+httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
@@ -23,20 +23,20 @@ axios.interceptors.request.use(
   },
 );
 
-axios.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response;
-  },
-  (error) => {
-    const request = error.config;
+// axios.interceptors.response.use(
+//   (response: AxiosResponse) => {
+//     return response;
+//   },
+//   (error) => {
+//     const request = error.config;
 
-    if ((error.response?.status === 401 || error.response?.status === 406) && !request._retry) {
-      localStorage.removeItem(ACCESS_TOKEN);
-      window.location.href = '/login';
-    }
+//     if ((error.response?.status === 401 || error.response?.status === 406) && !request._retry) {
+//       localStorage.removeItem(ACCESS_TOKEN);
+//       window.location.href = '/login';
+//     }
 
-    return Promise.reject(error);
-  },
-);
+//     return Promise.reject(error);
+//   },
+// );
 
 export { httpClient };

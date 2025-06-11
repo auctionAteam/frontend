@@ -32,13 +32,14 @@ const BeforeBox: React.FC<BeforeBoxProps> = ({ days, hours, minutes, seconds, ha
             </div>
           </div>
 
-          <p>The auction will start soon. You can set a reminder to be notified when it begins.</p>
+          <p>경매가 곧 시작됩니다. 잠시만 기다려주세요.</p>
         </>
       ) : (
         <div className="bidBtnBox">
           <button className="bidBtn" onClick={handleAuction}>
-            첫 입찰 하기
+            경매 시작
           </button>
+          <p>경매 가능 시간이 되었습니다. 경매를 시작하주세요.</p>
         </div>
       )}
     </BeforeBoxStyle>
@@ -79,14 +80,23 @@ const BeforeBoxStyle = styled.div`
   .bidBtnBox {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    p {
+      margin-top: 14px;
+    }
   }
   .bidBtn {
     border-radius: 6px;
     gap: 8px;
     font-weight: 600;
+    width: 160px;
     background-color: black;
-    padding: 10px 20px;
+    padding: 10px 24px;
     font-size: 16px;
+
     color: white;
     display: flex;
     justify-content: center;

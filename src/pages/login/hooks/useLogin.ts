@@ -11,11 +11,14 @@ import { emailRegex } from '@/utils/regExp';
 const useLogin = () => {
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [errorState, setErrorState] = useState<{ [key: string]: string }>({ email: '', password: '' });
+  const [localEmail, setLocalEmail] = useState<string>('');
   const navigate = useNavigate();
 
   const { mutate: userLogin } = useUserLogin({
     onSuccess: (response) => {
       localStorage.setItem(ACCESS_TOKEN, response.token);
+      localStorage.setItem('email', response.loginUser.email);
+      localStorage.setItem('userId', response.loginUser.id);
 
       toast.success('로그인 성공!');
       navigate('/');

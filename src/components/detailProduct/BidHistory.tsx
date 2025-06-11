@@ -6,8 +6,9 @@ const BidHistoryStyle = styled.div`
   width: 50%;
   display: flex;
   background-color: white;
+  flex: 1;
   border-radius: 8px;
-
+  min-height: 280px; 
   border: 0.8px solid rgb(2, 8, 23);
   border-color: rgb(226, 232, 240);
   padding: 24px;
@@ -45,10 +46,19 @@ const BidHistoryStyle = styled.div`
     padding: 12px 0;
   }
 
+  .historyText{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 48px;
+    
+  }
+
   .historyLeftBox {
     display: flex;
     height: 32px;
   }
+
   .avatar {
     width: 32px;
     height: 32px;
@@ -99,20 +109,27 @@ const BidHistory: React.FC<BidHistoryProps> = ({ status, bidList }) => {
       )}
       {status === 'auction' && (
         <div className="bitHistoryBox">
-          {bidList.map((b) => {
+          {
+            bidList.length === 0 ?   <div className="historyText" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
+            첫 입찰의 주인공이 되어보세요.
+          </div> : 
+          <>
+          {bidList.map((b,i ) => {
             return (
-              <div className="bidBox" key={b.id}>
+              <div className="bidBox" key={i}>
                 <div className="historyLeftBox">
                   <div className="avatar"></div>
                   <div className="userInfoBox">
-                    <div className="userName">{b.name}</div>
-                    <div className="bidTime">{b.time}</div>
+                    <div className="userName">{b.buyerName}</div>
+                    <div className="bidTime">{b.bidTime}</div>
                   </div>
                 </div>
                 <div className="historyRightBox">{b.price} 원</div>
               </div>
             );
           })}
+          </>
+        }
         </div>
       )}
       {/* {status === 'end' && (

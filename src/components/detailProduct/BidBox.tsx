@@ -8,6 +8,7 @@ import { getRemainingTime } from '@/utils/timeUtils';
 import toast from 'react-hot-toast';
 
 const BidBoxStyle = styled.div`
+  flex: 1;
   background-color: white;
   width: 50%;
   border-radius: 8px;
@@ -17,6 +18,7 @@ const BidBoxStyle = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  min-height: 280px; 
   padding: 24px;
   .title {
     font-size: 18px;
@@ -32,11 +34,12 @@ interface BidHistoryProps {
   bidList: Bid[];
   setBidList: React.Dispatch<React.SetStateAction<Bid[]>>;
   startPrice: number;
-  endPrice: number;
+  
   priceUnit: number;
-  token: string;
+  token?: string | undefined;
   buyerId: number;
   startTime: string;
+  endPrice: number
 }
 
 const BidBox: React.FC<BidHistoryProps> = ({
@@ -48,6 +51,8 @@ const BidBox: React.FC<BidHistoryProps> = ({
   buyerId,
   token,
   itemId,
+  
+  setBidList
 }) => {
   const [timeParts, setTimeParts] = useState<TimeParts>({
     days: 0,
@@ -56,11 +61,11 @@ const BidBox: React.FC<BidHistoryProps> = ({
     seconds: 0,
   });
 
-  const [nowBidMoney, setNowBidMoney] = useState<number>(endPrice);
+  
   const [bidNum, setBidNum] = useState(0);
 
   const handleBid = (r: number) => {
-    setBidNum(r * priceUnit + nowBidMoney);
+    setBidNum(r * priceUnit + endPrice);
   };
 
   const handleBidMoney = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,13 +88,15 @@ const BidBox: React.FC<BidHistoryProps> = ({
         fetchItem();
       } else {
         // 실제 입찰 요청 주석 해제 필요
-        // const result = await bidAuction({
-        //   itemId: itemId,
-        //   buyerId: buyerId,
-        //   price: bidNum,
-        //   token: token,
-        // });
-        console.log('입찰 성공:', itemId, buyerId, bidNum, token);
+        
+        const result = await bidAuction({
+          itemId: Number(itemId),
+          buyerId: buyerId,
+          price: bidNum,
+          
+        });
+        
+        setBidList(result.info)
         setBidNum(0);
       }
     } catch (err) {
@@ -127,7 +134,7 @@ const BidBox: React.FC<BidHistoryProps> = ({
         />
       ) : status === 'auction' ? (
         <AuctionBox
-          nowBidMoney={nowBidMoney}
+          nowBidMoney={endPrice}
           priceUnit={priceUnit}
           bidNum={bidNum}
           handleBid={handleBid}

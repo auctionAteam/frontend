@@ -10,20 +10,32 @@ import { getRemainingTime } from '@/utils/date';
 import Flex from '../Flex';
 import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
+import LikeBtn from '@/components/detailProduct/LikeBtn';
 
 const AuctionItem = forwardRef(
   ({ id, img, itemName, endTime, startPrice, userName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
     const navigate = useNavigate();
-
+    const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+      e.currentTarget.src = '/images/basic_image.jpg';
+    };
     return (
       <StyledActionItem ref={ref} onClick={() => navigate(`/detailPage/${id}`, { state: { id } })}>
         <StyledThumbnailWrapper>
-          <img src={img[0]} alt="item-image" />
+          <img src={img[0]} alt="item-image" onError={handleError} />
         </StyledThumbnailWrapper>
         <Flex direction="column" gap="3px" style={{ width: '100%' }}>
-          <Text font="subTitle1" css={ellipsis}>
-            {itemName}
-          </Text>
+          <Flex style={{ width: '100%', justifyContent: 'space-between' }}>
+            <Text font="subTitle1" css={ellipsis}>
+              {itemName}
+            </Text>
+            <LikeBtn
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log('LikeBtn clicked!');
+              }}
+            />
+          </Flex>
           <Flex gap="8px" align="center">
             <Text font="h3">
               {startPrice.toLocaleString()}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { httpClient } from '../httpClient';
 
 const baseURL = import.meta.env.VITE_API_URL;
 
@@ -15,6 +16,31 @@ export interface TimeParts {
   seconds: number;
 }
 
+export const getUserInformation = async (email: string, token: string) => {
+  try {
+    const response = await axios.get(`${baseURL}/users/info`, {
+      params: { email },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('유저 정보 조회 실패:', error);
+    throw error;
+  }
+};
+
+export const fetchBidHistory = async (itemId: number) => {
+  const response = await httpClient.get(`${baseURL}/auction/${itemId}`, {
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+  console.log(response.data)
+  return response.data;  
+};
+
 export const startAuction = async ({ itemId, token }: { itemId: number; token: string }) => {
   try {
     const response = await axios.post(
@@ -23,6 +49,7 @@ export const startAuction = async ({ itemId, token }: { itemId: number; token: s
       {
         headers: {
           Authorization: `Bearer ${token}`,
+
         },
       },
     );
@@ -37,15 +64,15 @@ export const bidAuction = async ({
   itemId,
   buyerId,
   price,
-  token,
+  
 }: {
   itemId: number;
   buyerId: number;
   price: number;
-  token: string;
 }) => {
   try {
-    const response = await axios.put(
+    
+    const response = await httpClient.put(
       `${baseURL}/auction/${itemId}`,
       {
         buyerId,
@@ -53,11 +80,12 @@ export const bidAuction = async ({
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     );
-    console.log(response);
+    return response.data; 
     // return response.data;
   } catch (error) {
     console.error('입찰 실패:', error);
@@ -81,6 +109,7 @@ export const getItem = async ({
     setItem(itemData);
     setStatus(itemData.state);
     setImages(JSON.parse(itemData.img));
+    console.log(response.data[0]);
   } catch (err) {
     console.error('요청 에러:', err);
   }
