@@ -5,12 +5,14 @@ import FavoriteItem from '@/components/mypage/FavoriteItem';
 import MyWinItem from '@/components/mypage/MyWinItem';
 import RegisterItem from '@/components/mypage/RegisterItem';
 import UserInfo from '@/components/mypage/UsersInfo';
-import { ACCESS_TOKEN } from '@/constants/token';
+import { ACCESS_TOKEN, USER_EMAIL } from '@/constants/token';
 import { colors } from '@/styles';
 
 const MyPage = () => {
   const onClickLogOut = () => {
     localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(USER_EMAIL);
+
     window.location.href = '/';
   };
 

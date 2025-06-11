@@ -1,7 +1,7 @@
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
-import { ACCESS_TOKEN } from '@/constants/token';
+import { ACCESS_TOKEN, USER_EMAIL } from '@/constants/token';
 
 const httpClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -30,8 +30,10 @@ httpClient.interceptors.response.use(
   (error) => {
     const request = error.config;
 
-    if ((error.response?.status === 401 || error.response?.status === 406) && !request._retry) {
+    if (error.response?.status === 401 && !request._retry) {
       localStorage.removeItem(ACCESS_TOKEN);
+      localStorage.removeItem(USER_EMAIL);
+
       window.location.href = '/login';
     }
 

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { forwardRef, type Ref } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 import { colors } from '@/styles';
 import { ellipsis } from '@/styles/ellipsis';
@@ -9,7 +10,6 @@ import { getRemainingTime } from '@/utils/date';
 
 import Flex from '../Flex';
 import Text from '../Text';
-import { useNavigate } from 'react-router-dom';
 
 const AuctionItem = forwardRef(
   ({ id, img, itemName, endTime, startPrice, userName }: AuctionItemType, ref: Ref<HTMLDivElement>) => {
@@ -17,9 +17,7 @@ const AuctionItem = forwardRef(
 
     return (
       <StyledActionItem ref={ref} onClick={() => navigate(`/detailPage/${id}`)}>
-        <StyledThumbnailWrapper>
-          <img src={img[0]} alt="item-image" />
-        </StyledThumbnailWrapper>
+        <StyledThumbnailWrapper>{/* <img src={img[0]} alt="item-image" /> */}</StyledThumbnailWrapper>
         <Flex direction="column" gap="3px" style={{ width: '100%' }}>
           <Text font="subTitle1" css={ellipsis}>
             {itemName}
@@ -68,6 +66,7 @@ const StyledThumbnailWrapper = styled.div`
   border-radius: 8px;
   margin-bottom: 8px;
   overflow: hidden;
+  background-color: ${colors.gray150};
 
   img {
     width: 100%;

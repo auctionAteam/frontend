@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ACCESS_TOKEN } from '@/constants/token';
@@ -20,7 +19,8 @@ const Header = () => {
           <img src="/images/logo.png" />
         </Link>
         {localStorage.getItem(ACCESS_TOKEN) ? (
-          <Flex style={{ width: '110px' }}>
+          <Flex style={{ width: '240px' }} gap="10px">
+            <Button onClick={() => navigate('/register')}>상품 등록</Button>
             <Button onClick={() => navigate('/mypage')} styleType="ghost">
               마이 페이지
             </Button>
