@@ -2,7 +2,7 @@ import React from 'react';
 import type { ActionItem } from '@/types/product';
 import styled from '@emotion/styled';
 import { getRemainingTime } from '@/utils/timeUtils';
-import LikeBtn from './likeBtn';
+import LikeBtn from './LikeBtn';
 
 interface BidHistoryProps {
   status: string;
