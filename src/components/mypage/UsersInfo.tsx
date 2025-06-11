@@ -1,29 +1,24 @@
 import styled from '@emotion/styled';
 
+import UserInfoItem from '@/components/mypage/UserInfoItem';
+import useGetUserInfo from '@/hooks/apis/users/useGetUserInfo';
 import { colors } from '@/styles';
 
-import UserInfoItem from './UserInfoItem';
-
 const UsersInfo = () => {
-  const user = {
-    id: 'User1234',
-    name: '김철수',
-    phone: '010-1234-5678',
-    email: 'abcd1234@gmail.com',
-    address: '서울시 서초구 반포대로 45',
-    created_at: '2025-01-01',
-  };
+  const { data: userInfo, isLoading, isError } = useGetUserInfo();
+
+  if (isLoading) return <div>Loading..</div>;
+  if (isError || !userInfo) return <div>에러 발생!</div>;
 
   return (
     <Section>
       <Title>내 정보</Title>
       <InfoGrid>
-        <UserInfoItem label="아이디" value={user.id} />
-        <UserInfoItem label="이름" value={user.name} />
-        <UserInfoItem label="이메일" value={user.email} />
-        <UserInfoItem label="전화번호" value={user.phone} />
-        <UserInfoItem label="가입일" value={user.created_at} />
-        <UserInfoItem label="주소" value={user.address} />
+        <UserInfoItem label="이름" value={userInfo.name} />
+        <UserInfoItem label="이메일" value={userInfo.email} />
+        <UserInfoItem label="주소" value={userInfo.address} />
+        <UserInfoItem label="전화번호" value={userInfo.phoneNum} />
+        <UserInfoItem label="가입일" value={userInfo.createAt} />
       </InfoGrid>
     </Section>
   );
@@ -38,7 +33,6 @@ const Section = styled.section`
   padding: 24px;
   margin-bottom: 40px;
   transition: all 0.1s ease;
-
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
@@ -47,7 +41,7 @@ const Section = styled.section`
 const Title = styled.h2`
   font-size: 20px;
   font-weight: bold;
-  margin-top: 16px;
+  margin-top: 24px;
   margin-bottom: 20px;
   border-bottom: thin solid ${colors.gray200};
   padding-bottom: 12px;
@@ -55,6 +49,6 @@ const Title = styled.h2`
 
 const InfoGrid = styled.ul`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); //열 2개
-  gap: 16px 32px; //세로 16px, 가로 32px 간격
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
 `;

@@ -1,11 +1,6 @@
 import styled from '@emotion/styled';
 
-interface Props {
-  label: string;
-  value: string;
-}
-
-const UserInfoItem = ({ label, value }: Props) => {
+const UserInfoItem = ({ label, value }: { label: string; value: string }) => {
   return (
     <Item>
       <Label>{label}</Label>

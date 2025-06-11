@@ -7,4 +7,7 @@ export type AuctionItemType = {
   startTime: string;
   endTime: string;
   userName: string;
+  name: string;
+  thumbnail: string;
+  description: string;
 };

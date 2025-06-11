@@ -1,16 +1,27 @@
 import styled from '@emotion/styled';
 import { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import { Flex } from '@/components/common';
+import { Motion } from '@/components/common';
 import Button from '@/components/common/Button';
 import PageWrapper from '@/components/layout/PageWrapper';
+import { USER_EMAIL } from '@/constants/token';
+import usePostItem from '@/hooks/apis/items/usePostItem';
 import { colors } from '@/styles';
 
 const RegisterPage = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState<string | null>(null);
+  const [selectedPeriod, setSelectedPeriod] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+
+  const { mutate: postItem } = usePostItem({
+    onSuccess: () => {
+      toast.success('상품 등록 성공!');
+
+      navigate('/');
+    },
+  });
 
   const handleFileClick = () => {
     fileInputRef.current?.click();
@@ -23,79 +34,106 @@ const RegisterPage = () => {
     }
   };
 
-  const handleRegister = () => {
-    alert('상품이 등록되었습니다');
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const itemName = formData.get('itemName') as string;
+    const startPrice = formData.get('startPrice') as string;
+    const bidStep = formData.get('bidStep') as string;
+    const description = formData.get('description') as string;
+
+    postItem({
+      email: String(localStorage.getItem(USER_EMAIL)),
+      name: itemName,
+      day: Number(selectedPeriod),
+      startPrice: Number(startPrice),
+      priceUnit: Number(bidStep),
+      size: '중형',
+      information: description,
+    });
+
+    e.currentTarget.reset();
   };
 
   return (
-    <PageWrapper>
-      <RegisterContainer>
-        <Title>상품 등록 페이지</Title>
-        <SubTitle>새로운 경매 상품을 등록하여 판매를 시작하세요</SubTitle>
+    <Motion>
+      <PageWrapper>
+        <RegisterContainer>
+          <Title>상품 등록 페이지</Title>
+          <SubTitle>새로운 경매 상품을 등록하여 판매를 시작하세요</SubTitle>
 
-        <Card>
-          <CardTitle>상품 정보</CardTitle>
-          <Input type="text" placeholder="상품명을 입력하세요" />
-          <Textarea placeholder="상품 설명" />
-        </Card>
+          <form onSubmit={handleRegister}>
+            <Card>
+              <CardTitle>상품 정보</CardTitle>
+              <Input type="text" name="itemName" placeholder="상품명을 입력하세요" />
+              <Textarea name="description" placeholder="상품 설명" />
+            </Card>
 
-        <Card>
-          <CardTitle>경매 설정</CardTitle>
-          <Flex gap={16} wrap="wrap">
-            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
-              <Label htmlFor="startPrice">시작 입찰가</Label>
-              <Input id="startPrice" type="number" placeholder="0" />
-              <Unit>원</Unit>
-            </Flex>
-            <Flex direction="column" style={{ flex: 1, position: 'relative', gap: 6 }}>
-              <Label htmlFor="bidStep">입찰 단위</Label>
-              <Input id="bidStep" type="number" placeholder="0" />
-              <Unit>원</Unit>
-            </Flex>
-          </Flex>
+            <Card>
+              <CardTitle>경매 설정</CardTitle>
+              <SettingSection>
+                <InputWrapper>
+                  <Label htmlFor="startPrice">시작 입찰가</Label>
+                  <Input id="startPrice" name="startPrice" type="number" placeholder="0" />
+                  <Unit>원</Unit>
+                </InputWrapper>
+                <InputWrapper>
+                  <Label htmlFor="bidStep">입찰 단위</Label>
+                  <Input id="bidStep" name="bidStep" type="number" placeholder="0" />
+                  <Unit>원</Unit>
+                </InputWrapper>
+              </SettingSection>
 
-          <PeriodSection>
-            <Label>경매 기간</Label>
-            <Period>
-              {['1일', '1주', '2주', '3주', '4주'].map((label) => (
-                <PeriodButton
-                  key={label}
-                  isActive={selectedPeriod === label}
-                  onClick={() => setSelectedPeriod(label)}
-                >
-                  {label}
-                </PeriodButton>
-              ))}
-            </Period>
-          </PeriodSection>
-        </Card>
+              <PeriodSection>
+                <Label>경매 기간</Label>
+                <Period>
+                  {[1, 7, 14, 21, 28].map((day) => (
+                    <PeriodButton
+                      type="button"
+                      key={day}
+                      isActive={selectedPeriod === day}
+                      onClick={() => setSelectedPeriod(day)}
+                    >
+                      {day === 1 ? '1일' : `${day / 7}주`}
+                    </PeriodButton>
+                  ))}
+                </Period>
+              </PeriodSection>
+            </Card>
 
-        <Card>
-          <CardTitle>상품 이미지</CardTitle>
-          <UploadImg>
-            <Plus>+</Plus>
-            <div>이미지를 드래그하거나 클릭하여 업로드</div>
-            <DescImg>JPG, PNG 파일만 지원됩니다.</DescImg>
-            <UploadButton onClick={handleFileClick}>파일 선택</UploadButton>
-            <input type="file" hidden ref={fileInputRef} onChange={handleFileChange} accept="image/*" />
-          </UploadImg>
-        </Card>
+            <Card>
+              <CardTitle>상품 이미지</CardTitle>
+              <UploadImg>
+                <Plus>+</Plus>
+                <div>이미지를 드래그하거나 클릭하여 업로드</div>
+                <DescImg>JPG, PNG 파일만 지원됩니다.</DescImg>
+                <UploadButton type="button" onClick={handleFileClick}>
+                  파일 선택
+                </UploadButton>
+                <input type="file" hidden ref={fileInputRef} onChange={handleFileChange} accept="image/*" />
+              </UploadImg>
+            </Card>
 
-        <DecisionButton>
-          <Button
-            styleType="ghost"
-            size="small"
-            style={{ color: colors.gray250, borderColor: colors.gray250 }}
-            onClick={() => navigate(-1)}
-          >
-            뒤로 가기
-          </Button>
-          <Button styleType="primary" size="small" onClick={handleRegister}>
-            등록하기
-          </Button>
-        </DecisionButton>
-      </RegisterContainer>
-    </PageWrapper>
+            <DecisionButton>
+              <Button
+                type="button"
+                styleType="ghost"
+                size="small"
+                style={{ color: colors.gray250, borderColor: colors.gray250 }}
+                onClick={() => navigate(-1)}
+              >
+                뒤로 가기
+              </Button>
+              <Button styleType="primary" size="small" type="submit">
+                등록하기
+              </Button>
+            </DecisionButton>
+          </form>
+        </RegisterContainer>
+      </PageWrapper>
+    </Motion>
   );
 };
 
@@ -162,6 +200,20 @@ const Textarea = styled.textarea`
   font-size: 12px;
   resize: none;
   box-sizing: border-box;
+`;
+
+const SettingSection = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+`;
+
+const InputWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 6px;
 `;
 
 const Unit = styled.span`
