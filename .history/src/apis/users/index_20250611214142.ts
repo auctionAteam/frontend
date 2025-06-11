@@ -58,10 +58,8 @@ const getUserInfo = async () => {
 
 const getUserItems = async (params: GetUserItemsParams, body?: GetUserItemsRequestBody) => {
   const { limit, currentPage } = params;
-  const email = localStorage.getItem(USER_EMAIL);
-
   return await httpClient
-    .get(`/users/item?email=${email}`, {
+    .get('/users/item', {
       params: {
         limit,
         currentPage,
