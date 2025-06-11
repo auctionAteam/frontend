@@ -15,11 +15,11 @@ const UsersInfo = () => {
     <Section>
       <Title>내 정보</Title>
       <InfoGrid>
-        <UserInfoItem label="이름" value={userInfo!.name} />
-        <UserInfoItem label="이메일" value={userInfo!.email} />
-        <UserInfoItem label="주소" value={userInfo!.address} />
-        <UserInfoItem label="전화번호" value={userInfo!.phoneNum} />
-        <UserInfoItem label="가입일" value={userInfo!.createAt} />
+        <UserInfoItem label="이름" value={userInfo.name} />
+        <UserInfoItem label="이메일" value={userInfo.email} />
+        <UserInfoItem label="주소" value={userInfo.address} />
+        <UserInfoItem label="전화번호" value={userInfo.phoneNum} />
+        <UserInfoItem label="가입일" value={userInfo.createAt} />
       </InfoGrid>
     </Section>
   );

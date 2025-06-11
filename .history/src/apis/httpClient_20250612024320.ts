@@ -8,7 +8,7 @@ const httpClient: AxiosInstance = axios.create({
   timeout: 10000,
 });
 
-httpClient.interceptors.request.use(
+axios.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
@@ -23,7 +23,7 @@ httpClient.interceptors.request.use(
   },
 );
 
-httpClient.interceptors.response.use(
+axios.interceptors.response.use(
   (response: AxiosResponse) => {
     return response;
   },

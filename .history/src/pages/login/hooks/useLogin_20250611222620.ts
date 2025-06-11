@@ -2,8 +2,9 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import { ACCESS_TOKEN, USER_EMAIL } from '@/constants/token';
+import { ACCESS_TOKEN } from '@/constants/token';
 import useUserLogin from '@/hooks/apis/users/useUserLogin';
+
 import { fromValidate } from '@/utils/formValidate';
 import { emailRegex } from '@/utils/regExp';
 
@@ -15,7 +16,6 @@ const useLogin = () => {
   const { mutate: userLogin } = useUserLogin({
     onSuccess: (response) => {
       localStorage.setItem(ACCESS_TOKEN, response.token);
-      localStorage.setItem(USER_EMAIL, response.loginUser.email);
 
       toast.success('로그인 성공!');
       navigate('/');

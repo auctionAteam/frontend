@@ -4,24 +4,29 @@ import AuctionItemCard from '@/components/mypage/AuctionItemCard';
 import useGetUserItems from '@/hooks/apis/users/useGetUserItems';
 import { colors } from '@/styles';
 
-const FavoriteItem = () => {
+const BiddingItem = () => {
   const { data: userItems, isLoading, isError } = useGetUserItems({
     params: {
       limit: 10,
       currentPage: 1,
     },
+    body: {
+      state: 'auction',
+    },
   });
+
+  console.log('BiddingItem userItems', userItems);
 
   return (
     <Section>
-      <Title>관심 등록한 상품</Title>
+      <Title>입찰 중인 상품</Title>
       <ItemList>
         {isLoading ? (
           <div>Loading..</div>
         ) : isError ? (
           <div>에러 발생!</div>
         ) : Array.isArray(userItems) && userItems.length === 0 ? (
-          <div>관심 등록한 상품이 없습니다.</div>
+          <div>입찰 중인 상품이 없습니다.</div>
         ) : Array.isArray(userItems) ? ( 
           userItems.map((myPageItem, index) => (
               <AuctionItemCard 
@@ -41,7 +46,7 @@ const FavoriteItem = () => {
   );
 };
 
-export default FavoriteItem;
+export default BiddingItem;
 
 const Section = styled.section`
   border: #fff;
@@ -50,6 +55,7 @@ const Section = styled.section`
   padding: 24px;
   margin-bottom: 40px;
   transition: all 0.1s ease;
+
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
@@ -68,19 +74,4 @@ const ItemList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`;
-
-const Field = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const Label = styled.span`
-  font-weight: 600;
-`;
-
-const SellerValue = styled.span`
-  color: ${colors.gray300};
-  font-weight: bold;
-  margin-bottom: 6px;
 `;

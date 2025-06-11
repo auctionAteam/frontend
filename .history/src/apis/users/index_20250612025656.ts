@@ -59,14 +59,16 @@ const getUserInfo = async () => {
 
 const getUserItems = async (params: GetUserItemsParams, body?: GetUserItemsRequestBody) => {
   const { limit, currentPage } = params;
-  return await httpClient.post('/users/item', {
-    email: localStorage.getItem(USER_EMAIL),
-    limit,
-    currentPage,
-    ...body
-  })
-  .then((response) => response.data.items);
-};
+  return await httpClient
+    .get('/users/item', {
+      params: {
+        limit,
+        currentPage
+      },
+      data: body
+    })
+    .then((response) => response.data.items);
+}
 
 export type { 
   GetUserInfoResponse,
