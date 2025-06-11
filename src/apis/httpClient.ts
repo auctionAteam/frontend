@@ -1,14 +1,14 @@
 import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
-import { ACCESS_TOKEN } from '@/constants/token';
+import { ACCESS_TOKEN, USER_EMAIL } from '@/constants/token';
 
 const httpClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000,
 });
 
-axios.interceptors.request.use(
+httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
@@ -23,15 +23,17 @@ axios.interceptors.request.use(
   },
 );
 
-axios.interceptors.response.use(
+httpClient.interceptors.response.use(
   (response: AxiosResponse) => {
     return response;
   },
   (error) => {
     const request = error.config;
 
-    if ((error.response?.status === 401 || error.response?.status === 406) && !request._retry) {
+    if (error.response?.status === 401 && !request._retry) {
       localStorage.removeItem(ACCESS_TOKEN);
+      localStorage.removeItem(USER_EMAIL);
+
       window.location.href = '/login';
     }
 

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUserItems } from '@/apis/users';
+
 import type { GetUserItemsParams, GetUserItemsRequestBody, GetUserItemsResponseItem } from '@/apis/users';
+import { getUserItems } from '@/apis/users';
 
 type UseGetItemsProps = {
   params: GetUserItemsParams;

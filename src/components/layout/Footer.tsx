@@ -5,7 +5,6 @@ import { IoLogoGithub } from 'react-icons/io';
 import { colors } from '@/styles';
 
 import { Flex } from '../common';
-
 import Wrapper from './Wrapper';
 
 const Footer = () => {
